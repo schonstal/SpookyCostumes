@@ -32,7 +32,7 @@ class BackgroundGroup extends FlxSpriteGroup
     super.update();
     for (sprite in members) {
       if (sprite.y >= 10 * SPACE_Y) {
-        sprite.y = -2*SPACE_Y;
+        sprite.y = -2*SPACE_Y + (sprite.y - (10 * SPACE_Y));
       }
       if (sprite.x + sprite.width <= 0) {
         sprite.x = FlxG.width + (sprite.x + sprite.width) + SPACE_X;
