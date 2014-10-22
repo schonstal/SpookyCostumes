@@ -33,7 +33,7 @@ class MenuState extends FlxState
     marcelene.loadGraphic("assets/images/marcelene.png");
     marcelene.x = FlxG.width/2 - marcelene.width/2;
     marcelene.y = 10;
-    add(marcelene);
+    //add(marcelene);
 
     FlxG.camera.antialiasing = true;
   }
