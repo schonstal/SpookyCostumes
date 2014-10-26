@@ -24,7 +24,7 @@ class GradientButton extends FlxButton
 
   public function new(X:Float, Y:Float, Width:Int, Height:Int, text:String) {
     super(X+35, Y+35, text);
-    var gradient = FlxGradient.createGradientFlxSprite(Width*3, Height, [0xff130b22, 0xff43277c]);
+    var gradient = FlxGradient.createGradientFlxSprite(Width*3, Height, [0xff170e35, 0xff49245d]);
     loadGraphic(gradient.pixels);//, true, Width, Height);
 
     FlxSpriteUtil.drawRoundRect(this, 5, 5, Width-10, Height-10, 10, 10, 0x00000000, { thickness: 5, color: 0xffffffff }, { smoothing: false });

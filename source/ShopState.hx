@@ -30,7 +30,7 @@ class ShopState extends FlxState
     for (item in availableItems) {
       var width = 200;
       var height = 100;
-      shopButton = new GradientButton(FlxG.width/2 - (i%3 * width/2), 100 + Math.floor(i/3) * (height + 20), width, height, item);
+      shopButton = new GradientButton(FlxG.width/2 - (i%3 * width), 100 + Math.floor(i/3) * (height + 20), width, height, item);
       shopButton.onUp.callback = function():Void {
         Transition.to(new LairState());
       }
