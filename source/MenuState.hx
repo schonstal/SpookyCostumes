@@ -37,7 +37,7 @@ class MenuState extends FlxState
     //add(marcelene);
 
     add(new GradientButton(100, 300, 300, 100, "Drink Blood"));
-    add(new GradientButton(420, 300, 300, 100, "Do Something"));
+    add(new GradientButton(420, 300, 300, 100, "Give Candy"));
 
     FlxG.camera.antialiasing = true;
   }
