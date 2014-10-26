@@ -58,7 +58,7 @@ class Reg
     return instance._save.data.inventory;
   }
 
-  //Inventory
+  //Unlocks
   public static var unlocks(get, set):Dynamic;
 
   static function get_unlocks():Dynamic {
@@ -74,6 +74,56 @@ class Reg
   static function set_unlocks(value:Dynamic):Dynamic {
     instance._save.data.unlocks = value;
     return instance._save.data.unlocks;
+  }
+
+  //Available items
+  public static var items(get, set):Dynamic;
+
+  static function get_items():Dynamic {
+    if(instance._save.data.items == null) {
+      instance._save.data.items = {
+        "Pumpkin": {
+          description: "A decorative squash.",
+          cost: {
+            blood: 10
+          }
+        },
+        "Candle": {
+          description: "A long, waxy stick.\nGood for parties.",
+          cost: {
+            blood: 10
+          }
+        },
+        "Basement Key": {
+          description: "Unlocks the basement.",
+          cost: {
+            blood: 50
+          }
+        },
+        "Beguiler": {
+          description: "Spellbinds trick-or-treaters.",
+          cost: {
+            blood: 100
+          }
+        },
+        "Cauldron": {
+          description: "Bubble bubble toil and trouble.",
+          cost: {
+            blood: 1000
+          }
+        }
+      };
+    }
+    return instance._save.data.items;
+  }
+
+  static function set_items(value:Dynamic):Dynamic {
+    instance._save.data.items = value;
+    return instance._save.data.items;
+  }
+
+  public static function item(itemName:String):Dynamic {
+    return Reflect.getProperty(items, itemName);
   }
 
   public function new() {
