@@ -8,7 +8,7 @@ import flixel.ui.FlxButton;
 
 class LairState extends FlxState
 {
-  var outsideText:FlxText;
+  var titleText:FlxText;
 
   var doorButton:GradientButton;
   var shopButton:GradientButton;
@@ -20,10 +20,10 @@ class LairState extends FlxState
     add(new BackgroundGroup());
     add(new BloodText());
 
-    outsideText = new FlxText(0,30,FlxG.width,FlxG.height);
-    outsideText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 90, 0xffffffff, "center");
-    outsideText.text = "lair";
-    add(outsideText);
+    titleText = new FlxText(0,30,FlxG.width,FlxG.height);
+    titleText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 90, 0xffffffff, "center");
+    titleText.text = "lair";
+    add(titleText);
 
     doorButton = new GradientButton(FlxG.width/2 - 310, 200, 620, 100, "Front Door");
     doorButton.onUp.callback = function() {
@@ -33,7 +33,7 @@ class LairState extends FlxState
 
     shopButton = new GradientButton(FlxG.width/2 - 310, 320, 620, 100, "Vampyre Shoppe");
     shopButton.onUp.callback = function():Void {
-      Transition.to(new LairState());
+      Transition.to(new ShopState());
     }
     add(shopButton);
 

@@ -5,6 +5,8 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 
 class DrinkState extends FlxState
 {
@@ -24,12 +26,8 @@ class DrinkState extends FlxState
     add(new BloodText());
 
     outsideText = new FlxText(0,30,FlxG.width,FlxG.height);
-    outsideText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 90, 0xffffffff, "center");
+    outsideText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 90, 0xffeadbf4, "center");
     add(outsideText);
-
-    bloodButton = new GradientButton(FlxG.width/2 - 310, 410, 300, 100, "Trick");
-    bloodButton.onUp.callback = Resources.harvestBlood;
-    add(bloodButton);
 
     candyButton = new GradientButton(FlxG.width/2 + 10, 410, 300, 100, "Treat");
     candyButton.onUp.callback = Resources.harvestInfluence;
@@ -39,7 +37,21 @@ class DrinkState extends FlxState
     shopButton.onUp.callback = function():Void {
       Transition.to(new LairState());
     }
+    shopButton.exists = false;
     add(shopButton);
+
+    bloodButton = new GradientButton(FlxG.width/2 - 310, 410, 300, 100, "Trick");
+    bloodButton.onUp.callback = function():Void {
+      Resources.harvestBlood();
+      if (!Reg.unlocks.lair && Reg.inventory.blood >= 10) {
+        shopButton.alpha = 0;
+        shopButton.y = 580;
+        FlxTween.tween(shopButton, { alpha: 0.8, y: 530 }, 0.3, { ease: FlxEase.quartOut });
+        FlxTween.tween(shopButton.label, { alpha: 1 }, 0.3, { ease: FlxEase.quartOut });
+        Reg.unlocks.lair = true;
+      }
+    }
+    add(bloodButton);
 
     FlxG.camera.antialiasing = true;
   }
@@ -56,5 +68,8 @@ class DrinkState extends FlxState
     super.update();
 
     Resources.update();
+    if (Reg.unlocks.lair) {
+      shopButton.exists = true;
+    }
   }
 }
