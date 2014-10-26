@@ -23,7 +23,6 @@ class DrinkState extends FlxState
     Transition.finish();
 
     add(new BackgroundGroup());
-    add(new BloodText());
 
     outsideText = new FlxText(0,30,FlxG.width,FlxG.height);
     outsideText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 90, 0xffeadbf4, "center");
@@ -55,6 +54,8 @@ class DrinkState extends FlxState
 
     FlxG.mouse.useSystemCursor = true;
     FlxG.camera.antialiasing = true;
+
+    add(new NavGroup("Archway"));
   }
   
   override public function destroy():Void {

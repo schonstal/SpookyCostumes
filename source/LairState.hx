@@ -37,6 +37,8 @@ class LairState extends FlxState
     }
     add(shopButton);
 
+    add(new NavGroup("Lair"));
+
     FlxG.camera.antialiasing = true;
   }
   
