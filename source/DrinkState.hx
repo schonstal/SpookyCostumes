@@ -53,6 +53,7 @@ class DrinkState extends FlxState
     }
     add(bloodButton);
 
+    FlxG.mouse.useSystemCursor = true;
     FlxG.camera.antialiasing = true;
   }
   
