@@ -36,10 +36,17 @@ class ItemInfoGroup extends FlxSpriteGroup
     nameText.text = ItemName;
     add(nameText);
 
-    descriptionText = new FlxText(0,0,400,200);
+    descriptionText = new FlxText(0,0,360,200);
     descriptionText.setFormat("assets/fonts/RobotoSlab-Thin.ttf", 32, 0xffd2cae1, "left");
     descriptionText.text = item.description;
     add(descriptionText);
+
+    costText = new FlxText(0,0,400,100);
+    costText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 54, 0xfff08382, "left");
+    for(key in Reflect.fields(item.cost)) {
+      costText.text += key + ": " + Reflect.getProperty(item.cost, key) + "\n";
+    };
+    add(costText);
   }
 
   public override function update():Void {
@@ -47,13 +54,17 @@ class ItemInfoGroup extends FlxSpriteGroup
     infoBox.x = FlxG.mouse.x;
     infoBox.y = FlxG.mouse.y;
 
-    nameText.x = infoBox.x + 18;
+    nameText.x = infoBox.x + 22;
     nameText.y = infoBox.y + 8;
     nameText.alpha = infoBox.alpha;
 
-    descriptionText.x = infoBox.x + 18;
-    descriptionText.y = infoBox.y + 65;
+    descriptionText.x = infoBox.x + 22;
+    descriptionText.y = infoBox.y + 75;
     descriptionText.alpha = infoBox.alpha;
+
+    costText.x = infoBox.x + 22;
+    costText.y = infoBox.y + 150;
+    costText.alpha = infoBox.alpha;
   }
 
   public function show():Void {
