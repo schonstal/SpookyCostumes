@@ -12,14 +12,15 @@ import flixel.util.FlxGradient;
  */
 class MenuState extends FlxState
 {
-  var blood = 0;
   var bloodText:FlxText;
 
   var sinAmt:Float = 0;
   var marcelene:FlxSprite;
 
+
   override public function create():Void {
     super.create();
+
     add(FlxGradient.createGradientFlxSprite(FlxG.width,
                                             FlxG.height,
                                             [0xff43277c, 0xff130b22]));
@@ -47,9 +48,9 @@ class MenuState extends FlxState
 
   override public function update():Void {
     if (FlxG.mouse.justPressed) {
-      blood++;
+      Reg.blood++;
     }
-    if(blood > 0) bloodText.text = "Blood: " + blood;
+    if(Reg.blood > 0) bloodText.text = "Blood: " + Reg.blood;
     super.update();
 
     sinAmt += FlxG.elapsed;
