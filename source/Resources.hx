@@ -1,8 +1,15 @@
 import flixel.FlxG;
+import haxe.Timer;
 
 class Resources {
+  static var lastTime:Float = 0;
+
   public static function update() {
-    Reg.inventory.kids += FlxG.elapsed;
+    var timeDifference = (lastTime > 0 ? Timer.stamp() - lastTime : 0);
+
+    Reg.inventory.kids += timeDifference;
+
+    lastTime = Timer.stamp();
   }
 
   public static function harvestBlood() {
