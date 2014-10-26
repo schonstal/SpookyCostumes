@@ -10,8 +10,9 @@ class BloodText extends FlxText
   }
 
   override public function update():Void {
-    if(Reg.inventory.blood > 0) {
-      text = "Blood: " + Reg.inventory.blood;
+    text = "";
+    if (Reg.inventory.blood > 0) {
+      text += "Blood: " + Math.floor(Reg.inventory.blood) + "\n";
     }
     super.update();
   }

@@ -5,12 +5,15 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
-import flixel.util.FlxGradient;
 
 class DrinkState extends FlxState
 {
   var sinAmt:Float = 0;
   var marcelene:FlxSprite;
+  var outsideText:FlxText;
+
+  var bloodButton:GradientButton;
+  var candyButton:GradientButton;
 
   override public function create():Void {
     super.create();
@@ -24,8 +27,17 @@ class DrinkState extends FlxState
     marcelene.y = 10;
     //add(marcelene);
 
-    add(new GradientButton(100, 300, 300, 100, "Drink Blood"));
-    add(new GradientButton(420, 300, 300, 100, "Give Candy"));
+    outsideText = new FlxText(0,30,FlxG.width,FlxG.height);
+    outsideText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 90, 0xffffffff, "center");
+    add(outsideText);
+
+    bloodButton = new GradientButton(FlxG.width/2 - 310, 410, 300, 100, "Trick");
+    bloodButton.onUp.callback = Resources.harvestBlood;
+    add(bloodButton);
+
+    candyButton = new GradientButton(FlxG.width/2 + 10, 410, 300, 100, "Treat");
+    candyButton.onUp.callback = Resources.harvestInfluence;
+    add(candyButton);
 
     FlxG.camera.antialiasing = true;
   }
@@ -35,13 +47,15 @@ class DrinkState extends FlxState
   }
 
   override public function update():Void {
-    if (FlxG.mouse.justPressed) {
-      Reg.inventory.blood++;
-    }
+    outsideText.text = "Outside, there are\n" +
+                       Math.floor(Reg.inventory.kids) + "\n" +
+                       "kids in spooky costumes";
+
     super.update();
 
     sinAmt += FlxG.elapsed;
     //marcelene.offset.y = 10 * Math.sin(sinAmt);
 
+    Resources.update();
   }
 }

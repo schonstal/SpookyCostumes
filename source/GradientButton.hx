@@ -67,6 +67,8 @@ class GradientButton extends FlxButton
     width = Width;
     height = Height;
     offset.x = offset.y = 35;
+
+    alpha = 0.8;
   }
 
   override public function update():Void {
@@ -78,11 +80,13 @@ class GradientButton extends FlxButton
     blurTween.active = false;
     glowFilter.blurX = glowFilter.blurY = 0;
     label.color = 0xffffffff;
+    alpha = 0.8;
   }
 
   private function startHover():Void {
     blurTween.active = true;
     glowFilter.blurX = glowFilter.blurY = 10;
     label.color = 0xffe9a56d;
+    alpha = 1;
   }
 }
