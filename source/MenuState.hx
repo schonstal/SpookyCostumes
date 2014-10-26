@@ -20,24 +20,23 @@ class MenuState extends FlxState
 
   override public function create():Void {
     super.create();
-    FlxG.mouse.useSystemCursor = true;
     add(FlxGradient.createGradientFlxSprite(FlxG.width,
                                             FlxG.height,
                                             [0xff43277c, 0xff130b22]));
     add(new BackgroundGroup());
 
     bloodText = new FlxText();
+    bloodText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 64, 0xffffffff, "left");
     add(bloodText);
 
     marcelene = new FlxSprite();
     marcelene.loadGraphic("assets/images/test.png");
     marcelene.x = FlxG.width/2 - marcelene.width/2;
     marcelene.y = 10;
-    add(marcelene);
+    //add(marcelene);
 
-    add(new GradientButton(10, 0, 300, 100, "Butts and Balls"));
-    add(new GradientButton(30, 120, 150, 70, "Boop"));
-    add(new GradientButton(10, 250, 1000, 400, "A big button"));
+    add(new GradientButton(100, 300, 300, 100, "Drink Blood"));
+    add(new GradientButton(420, 300, 300, 100, "Do Something"));
 
     FlxG.camera.antialiasing = true;
   }
