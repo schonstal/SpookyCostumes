@@ -8,9 +8,8 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.text.FlxText;
 
-class ItemInfoGroup extends FlxSpriteGroup
+class ItemInfoGroup extends InfoGroup
 {
-  var infoBox:InfoBox;
   var item:Dynamic;
   var itemName:String;
   
@@ -19,10 +18,8 @@ class ItemInfoGroup extends FlxSpriteGroup
   var costText:FlxText;
 
   public function new(ItemName:String) {
-    super();
+    super(400,300);
 
-    infoBox = new InfoBox(400,300);
-    add(infoBox);
     itemName = ItemName;
     item = Reg.item(ItemName);
 
@@ -65,16 +62,5 @@ class ItemInfoGroup extends FlxSpriteGroup
     costText.x = infoBox.x + 22;
     costText.y = infoBox.y + 150;
     costText.alpha = infoBox.alpha;
-  }
-
-  public function show():Void {
-    FlxTween.tween(infoBox, { alpha: 0.9 }, 0.2, { ease: FlxEase.quartOut });
-    visible = true;
-  }
-
-  public function hide():Void {
-    FlxTween.tween(infoBox, { alpha: 0 }, 0.2, { ease: FlxEase.quartOut, onComplete: function(t):Void {
-      visible = false;
-    }});
   }
 }

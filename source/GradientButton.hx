@@ -22,7 +22,9 @@ class GradientButton extends FlxButton
   var glowFilter:GlowFilter;
   var blurTween:FlxTween;
 
-  public function new(X:Float, Y:Float, Width:Int, Height:Int, text:String) {
+  public var infoGroup:InfoGroup;
+
+  public function new(X:Float, Y:Float, Width:Int, Height:Int, text:String, _infoGroup:InfoGroup=null) {
     super(X+35, Y+35, text);
     var gradient = FlxGradient.createGradientFlxSprite(Width*3, Height, [0xff170e35, 0xff49245d]);
     loadGraphic(gradient.pixels);//, true, Width, Height);
@@ -69,6 +71,8 @@ class GradientButton extends FlxButton
     offset.x = offset.y = 35;
 
     alpha = 0.7;
+    
+    infoGroup = _infoGroup;
   }
 
   override public function update():Void {
@@ -81,6 +85,7 @@ class GradientButton extends FlxButton
     glowFilter.blurX = glowFilter.blurY = 0;
     label.color = 0xffffffff;
     alpha = 0.7;
+    if (infoGroup != null) infoGroup.hide();
   }
 
   private function startHover():Void {
@@ -88,5 +93,6 @@ class GradientButton extends FlxButton
     glowFilter.blurX = glowFilter.blurY = 10;
     label.color = 0xffe9a56d;
     alpha = 0.9;
+    if (infoGroup != null) infoGroup.show();
   }
 }
