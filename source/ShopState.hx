@@ -17,20 +17,15 @@ class ShopState extends FlxState
     add(new BackgroundGroup());
     add(new BloodText());
 
-    titleText = new FlxText(0,30,FlxG.width,FlxG.height);
-    titleText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 90, 0xffffffff, "center");
-    titleText.text = "Vampyre Shoppe";
-    add(titleText);
-
     var shopButton:GradientButton;
     //Make this a dynamic later? Or maybe have a class for an object.
-    var availableItems:Array<String> = ["Candle", "Pumpkin", "Butt", "Stink", "Diamond", "JoJo", "Uhg", "Candy Bar", "A Thing"];
+    var availableItems:Array<String> = ["Candle", "Pumpkin"];//, "Butt", "Stink", "Diamond", "JoJo", "Uhg", "Candy Bar", "A Thing"];
     
     var i:Int = 0;
     for (item in availableItems) {
-      var width = 200;
+      var width = 250;
       var height = 100;
-      shopButton = new GradientButton(FlxG.width/2 - (i%3 * width), 100 + Math.floor(i/3) * (height + 20), width, height, item);
+      shopButton = new GradientButton(120 + (i%3 * (width + 10)), 90 + Math.floor(i/3) * (height + 10), width, height, item);
       shopButton.onUp.callback = function():Void {
         Transition.to(new LairState());
       }
@@ -39,6 +34,8 @@ class ShopState extends FlxState
     }
 
     FlxG.camera.antialiasing = true;
+
+    add(new DialogBox(100, 430));
   }
   
   override public function destroy():Void {

@@ -27,9 +27,9 @@ class GradientButton extends FlxButton
     var gradient = FlxGradient.createGradientFlxSprite(Width*3, Height, [0xff170e35, 0xff49245d]);
     loadGraphic(gradient.pixels);//, true, Width, Height);
 
-    FlxSpriteUtil.drawRoundRect(this, 5, 5, Width-10, Height-10, 10, 10, 0x00000000, { thickness: 5, color: 0xffffffff }, { smoothing: false });
-    FlxSpriteUtil.drawRoundRect(this, Width + 5, 5, Width-10, Height-10, 10, 10, 0x00000000, { thickness: 5, color: 0xffe9a56d }, { smoothing: false });
-    FlxSpriteUtil.drawRoundRect(this, (2 * Width) + 5, 5, Width-10, Height-10, 10, 10, 0x00000000, { thickness: 5, color: 0xff333333 }, { smoothing: false });
+    FlxSpriteUtil.drawRoundRect(this, 5, 5, Width-10, Height-10, 10, 10, 0x00000000, { thickness: 5, color: 0xffdfd7ed }, { smoothing: false });
+    FlxSpriteUtil.drawRoundRect(this, Width + 5, 5, Width-10, Height-10, 10, 10, 0x00000000, { thickness: 5, color: 0xffe7d7d1 }, { smoothing: false });
+    FlxSpriteUtil.drawRoundRect(this, (2 * Width) + 5, 5, Width-10, Height-10, 10, 10, 0x00000000, { thickness: 5, color: 0xffaea09e }, { smoothing: false });
 
     var alphaSprite = new FlxSprite();
     var alphaStamp = new FlxSprite();
@@ -47,7 +47,7 @@ class GradientButton extends FlxButton
 
     loadGraphic(this.pixels, true, Width, Height);
 
-    label.setFormat("assets/fonts/AmaticSC-Regular.ttf", Height * 0.6, 0xffffffff, "center");
+    label.setFormat("assets/fonts/AmaticSC-Regular.ttf", Height * 0.6, 0xffeadbf4, "center");
     labelOffsets = [FlxPoint.get(-35, Height * 0.075), FlxPoint.get(-35, Height * 0.075), FlxPoint.get(-35, Height * 0.075 + 1)];
     labelAlphas = [1, 1, 0.5];
     label.alpha = 1;

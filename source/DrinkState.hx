@@ -26,7 +26,7 @@ class DrinkState extends FlxState
     add(new BloodText());
 
     outsideText = new FlxText(0,30,FlxG.width,FlxG.height);
-    outsideText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 90, 0xffffffff, "center");
+    outsideText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 90, 0xffeadbf4, "center");
     add(outsideText);
 
     candyButton = new GradientButton(FlxG.width/2 + 10, 410, 300, 100, "Treat");
