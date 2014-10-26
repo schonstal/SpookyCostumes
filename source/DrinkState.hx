@@ -14,18 +14,14 @@ class DrinkState extends FlxState
 
   var bloodButton:GradientButton;
   var candyButton:GradientButton;
+  var shopButton:GradientButton;
 
   override public function create():Void {
     super.create();
+    Transition.finish();
 
     add(new BackgroundGroup());
     add(new BloodText());
-
-    marcelene = new FlxSprite();
-    marcelene.loadGraphic("assets/images/test.png");
-    marcelene.x = FlxG.width/2 - marcelene.width/2;
-    marcelene.y = 10;
-    //add(marcelene);
 
     outsideText = new FlxText(0,30,FlxG.width,FlxG.height);
     outsideText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 90, 0xffffffff, "center");
@@ -38,6 +34,12 @@ class DrinkState extends FlxState
     candyButton = new GradientButton(FlxG.width/2 + 10, 410, 300, 100, "Treat");
     candyButton.onUp.callback = Resources.harvestInfluence;
     add(candyButton);
+
+    shopButton = new GradientButton(FlxG.width/2 - 310, 530, 620, 100, "Return to your Lair");
+    shopButton.onUp.callback = function():Void {
+      Transition.to(new LairState());
+    }
+    add(shopButton);
 
     FlxG.camera.antialiasing = true;
   }
@@ -52,9 +54,6 @@ class DrinkState extends FlxState
                        "kids in spooky costumes";
 
     super.update();
-
-    sinAmt += FlxG.elapsed;
-    //marcelene.offset.y = 10 * Math.sin(sinAmt);
 
     Resources.update();
   }
