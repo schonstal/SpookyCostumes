@@ -44,7 +44,9 @@ class Reg
   static function get_inventory():Dynamic {
     if(instance._save.data.inventory == null) {
       instance._save.data.inventory = {
-        blood: 0
+        blood: 0,
+        kids: 0,
+        items: {}
       };
     }
     return instance._save.data.inventory;
@@ -57,6 +59,6 @@ class Reg
 
   public function new() {
     _save = new FlxSave();
-    _save.bind("Witches");
+    _save.bind("Stinkers");
   }
 }

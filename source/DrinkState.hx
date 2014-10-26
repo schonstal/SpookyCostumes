@@ -7,28 +7,16 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxGradient;
 
-/**
- * A FlxState which can be used for the game's menu.
- */
-class MenuState extends FlxState
+class DrinkState extends FlxState
 {
-  var bloodText:FlxText;
-
   var sinAmt:Float = 0;
   var marcelene:FlxSprite;
-
 
   override public function create():Void {
     super.create();
 
-    add(FlxGradient.createGradientFlxSprite(FlxG.width,
-                                            FlxG.height,
-                                            [0xff43277c, 0xff130b22]));
     add(new BackgroundGroup());
-
-    bloodText = new FlxText();
-    bloodText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 64, 0xffffffff, "left");
-    add(bloodText);
+    add(new BloodText());
 
     marcelene = new FlxSprite();
     marcelene.loadGraphic("assets/images/test.png");
@@ -50,7 +38,6 @@ class MenuState extends FlxState
     if (FlxG.mouse.justPressed) {
       Reg.inventory.blood++;
     }
-    if(Reg.inventory.blood > 0) bloodText.text = "Blood: " + Reg.inventory.blood;
     super.update();
 
     sinAmt += FlxG.elapsed;
