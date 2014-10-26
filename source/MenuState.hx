@@ -30,10 +30,14 @@ class MenuState extends FlxState
     add(bloodText);
 
     marcelene = new FlxSprite();
-    marcelene.loadGraphic("assets/images/marcelene.png");
+    marcelene.loadGraphic("assets/images/test.png");
     marcelene.x = FlxG.width/2 - marcelene.width/2;
     marcelene.y = 10;
-    //add(marcelene);
+    add(marcelene);
+
+    add(new GradientButton(10, 0, 300, 100, "Butts and Balls"));
+    add(new GradientButton(30, 120, 150, 70, "Boop"));
+    add(new GradientButton(10, 250, 1000, 400, "A big button"));
 
     FlxG.camera.antialiasing = true;
   }
@@ -50,7 +54,7 @@ class MenuState extends FlxState
     super.update();
 
     sinAmt += FlxG.elapsed;
-    marcelene.offset.y = 10 * Math.sin(sinAmt);
+    //marcelene.offset.y = 10 * Math.sin(sinAmt);
 
   }
 }
