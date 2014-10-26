@@ -48,9 +48,9 @@ class MenuState extends FlxState
 
   override public function update():Void {
     if (FlxG.mouse.justPressed) {
-      Reg.blood++;
+      Reg.inventory.blood++;
     }
-    if(Reg.blood > 0) bloodText.text = "Blood: " + Reg.blood;
+    if(Reg.inventory.blood > 0) bloodText.text = "Blood: " + Reg.inventory.blood;
     super.update();
 
     sinAmt += FlxG.elapsed;

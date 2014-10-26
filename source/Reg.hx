@@ -38,18 +38,21 @@ class Reg
     return instance._save;
   }
 
-  //Blood
-  public static var blood(get, set):Float;
+  //Inventory
+  public static var inventory(get, set):Dynamic;
 
-  static function get_blood():Float {
-    if(instance._save.data.blood == null || Math.isNaN(instance._save.data.blood))
-      instance._save.data.blood = 0;
-    return instance._save.data.blood;
+  static function get_inventory():Dynamic {
+    if(instance._save.data.inventory == null) {
+      instance._save.data.inventory = {
+        blood: 0
+      };
+    }
+    return instance._save.data.inventory;
   }
 
-  static function set_blood(value:Float):Float {
-    instance._save.data.blood = value;
-    return instance._save.data.blood;
+  static function set_inventory(value:Dynamic):Dynamic {
+    instance._save.data.inventory = value;
+    return instance._save.data.inventory;
   }
 
   public function new() {
