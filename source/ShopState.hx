@@ -6,12 +6,9 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 
-class LairState extends FlxState
+class ShopState extends FlxState
 {
   var titleText:FlxText;
-
-  var doorButton:GradientButton;
-  var shopButton:GradientButton;
 
   override public function create():Void {
     super.create();
@@ -22,20 +19,24 @@ class LairState extends FlxState
 
     titleText = new FlxText(0,30,FlxG.width,FlxG.height);
     titleText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 90, 0xffffffff, "center");
-    titleText.text = "lair";
+    titleText.text = "Vampyre Shoppe";
     add(titleText);
 
-    doorButton = new GradientButton(FlxG.width/2 - 310, 200, 620, 100, "Front Door");
-    doorButton.onUp.callback = function() {
-      Transition.to(new DrinkState());
-    };
-    add(doorButton);
-
-    shopButton = new GradientButton(FlxG.width/2 - 310, 320, 620, 100, "Vampyre Shoppe");
-    shopButton.onUp.callback = function():Void {
-      Transition.to(new ShopState());
+    var shopButton:GradientButton;
+    //Make this a dynamic later? Or maybe have a class for an object.
+    var availableItems:Array<String> = ["Candle", "Pumpkin", "Butt", "Stink", "Diamond", "JoJo", "Uhg", "Candy Bar", "A Thing"];
+    
+    var i:Int = 0;
+    for (item in availableItems) {
+      var width = 200;
+      var height = 100;
+      shopButton = new GradientButton(FlxG.width/2 - (i%3 * width/2), 100 + Math.floor(i/3) * (height + 20), width, height, item);
+      shopButton.onUp.callback = function():Void {
+        Transition.to(new LairState());
+      }
+      add(shopButton);
+      i++;
     }
-    add(shopButton);
 
     FlxG.camera.antialiasing = true;
   }

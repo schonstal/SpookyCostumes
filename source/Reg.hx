@@ -46,6 +46,7 @@ class Reg
       instance._save.data.inventory = {
         blood: 0,
         kids: 0,
+        influence: 0,
         items: {}
       };
     }
@@ -57,8 +58,26 @@ class Reg
     return instance._save.data.inventory;
   }
 
+  //Inventory
+  public static var unlocks(get, set):Dynamic;
+
+  static function get_unlocks():Dynamic {
+    if(instance._save.data.unlocks == null) {
+      instance._save.data.unlocks = {
+        trick: false,
+        lair: false
+      };
+    }
+    return instance._save.data.unlocks;
+  }
+
+  static function set_unlocks(value:Dynamic):Dynamic {
+    instance._save.data.unlocks = value;
+    return instance._save.data.unlocks;
+  }
+
   public function new() {
     _save = new FlxSave();
-    _save.bind("Stinkers");
+    _save.bind("" + Math.random());
   }
 }
