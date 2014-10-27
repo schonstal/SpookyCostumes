@@ -47,8 +47,7 @@ class Reg
       instance._save.data.inventory = {
         blood: 0,
         kids: 0,
-        influence: 0,
-        items: {}
+        influence: 0
       };
     }
     return instance._save.data.inventory;
@@ -60,7 +59,7 @@ class Reg
   }
 
   public static function itemHeld(itemName:String):Float {
-    var quantity:Float = Reflect.getProperty(inventory.items, itemName);
+    var quantity:Float = Reflect.getProperty(inventory, itemName);
     if (Math.isNaN(quantity)) quantity = 0;
     return quantity;
   }
@@ -68,7 +67,7 @@ class Reg
   public static function addItem(itemName:String, amount:Float=1):Void {
     var quantity:Float = itemHeld(itemName);
     quantity += amount;
-    Reflect.setProperty(inventory.items, itemName, quantity);
+    Reflect.setProperty(inventory, itemName, quantity);
   }
 
   //Unlocks
@@ -122,6 +121,13 @@ class Reg
           description: "Bubble bubble toil and trouble.",
           cost: {
             blood: 1000
+          }
+        },
+        "Jack-O-Lantern": {
+          description: "Artisanal carved pumpkin. Attracts kids.",
+          cost: {
+            "Pumpkin": 1,
+            "Candle": 1
           }
         }
       };

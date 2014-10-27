@@ -12,6 +12,7 @@ class LairState extends FlxState
 
   var doorButton:GradientButton;
   var shopButton:GradientButton;
+  var basementButton:GradientButton;
 
   override public function create():Void {
     super.create();
@@ -30,6 +31,14 @@ class LairState extends FlxState
       Transition.to(new ShopState());
     }
     add(shopButton);
+
+    if (Reg.unlocks.basement) {
+      basementButton = new GradientButton(FlxG.width/2 - 310, 340, 620, 100, "Basement");
+      basementButton.onUp.callback = function():Void {
+        Transition.to(new BasementState());
+      }
+      add(basementButton);
+    }
 
     add(new NavGroup("Lair"));
 

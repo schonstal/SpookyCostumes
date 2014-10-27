@@ -106,7 +106,8 @@ class GradientButton extends FlxButton
     blurTween.active = true;
     glowFilter.blurX = glowFilter.blurY = 10;
     label.color = 0xffe9a56d;
-    alpha = enabled? 0.9 : 0.3;
+    alpha = enabled ? 0.9 : 0.3;
+    label.alpha = enabled ? 1 : 0.3;
 
     if (infoGroup != null) infoGroup.show();
   }

@@ -10,6 +10,7 @@ class ShopState extends FlxState
 {
   var titleText:FlxText;
   var infoGroup:ItemInfoGroup;
+  var dialog:DialogGroup;
 
   var buttons:Array<GradientButton> = [];
 
@@ -18,6 +19,10 @@ class ShopState extends FlxState
     Transition.finish();
 
     add(new BackgroundGroup());
+
+    dialog = new DialogGroup();
+    dialog.text = "I've got a lot of stuff on sale for Halloween. Take a look!";
+    add(dialog);
     
     var shopButton:GradientButton;
     //Make this a dynamic later? Or maybe have a class for an object.
@@ -32,6 +37,12 @@ class ShopState extends FlxState
         if (Reg.inventory.blood > Reg.item(item).cost.blood) {
           Reg.inventory.blood -= Math.floor(Reg.item(item).cost.blood);
           Reg.addItem(item);
+          dialog.text = "A fine choice.";
+          if (item == "Basement Key") {
+            Reg.unlocks.basement = true;
+          }
+        } else {
+          dialog.text = "You don't have enough blood to buy that.";
         }
       }
       add(shopButton);
@@ -41,7 +52,6 @@ class ShopState extends FlxState
 
     FlxG.camera.antialiasing = true;
 
-    add(new DialogBox(100, 430));
 
     for (button in buttons) {
       add(button.infoGroup);
