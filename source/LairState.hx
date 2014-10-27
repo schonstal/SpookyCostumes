@@ -42,6 +42,7 @@ class LairState extends FlxState
 
   override public function update():Void {
     super.update();
+    doorButton.text = "Front Door (" + Math.floor(Reg.inventory.kids) + ")";
     Resources.update();
   }
 }

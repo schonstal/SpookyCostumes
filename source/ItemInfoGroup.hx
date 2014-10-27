@@ -16,9 +16,10 @@ class ItemInfoGroup extends InfoGroup
   var nameText:FlxText;
   var descriptionText:FlxText;
   var costText:FlxText;
+  var ownedText:FlxText;
 
   public function new(ItemName:String) {
-    super(400,300);
+    super(400,310);
 
     itemName = ItemName;
     item = Reg.item(ItemName);
@@ -40,10 +41,11 @@ class ItemInfoGroup extends InfoGroup
 
     costText = new FlxText(0,0,400,100);
     costText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 54, 0xfff08382, "left");
-    for(key in Reflect.fields(item.cost)) {
-      costText.text += key + ": " + Reflect.getProperty(item.cost, key) + "\n";
-    };
     add(costText);
+
+    ownedText = new FlxText(0,0,400,100);
+    ownedText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 54, 0xffbf69e7, "left");
+    add(ownedText);
   }
 
   public override function update():Void {
@@ -60,7 +62,18 @@ class ItemInfoGroup extends InfoGroup
     descriptionText.alpha = infoBox.alpha;
 
     costText.x = infoBox.x + 22;
-    costText.y = infoBox.y + 150;
+    costText.y = infoBox.y + 160;
     costText.alpha = infoBox.alpha;
+
+    costText.text = "";
+    for (key in Reflect.fields(item.cost)) {
+      costText.text += key + ": " + Reflect.getProperty(item.cost, key) + "\n";
+    };
+
+    ownedText.x = infoBox.x + 22;
+    ownedText.y = infoBox.y + 220;
+    ownedText.alpha = infoBox.alpha;
+
+    ownedText.text = "Owned: " + Reg.itemHeld(itemName);
   }
 }

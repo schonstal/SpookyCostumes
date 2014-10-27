@@ -59,6 +59,18 @@ class Reg
     return instance._save.data.inventory;
   }
 
+  public static function itemHeld(itemName:String):Float {
+    var quantity:Float = Reflect.getProperty(inventory.items, itemName);
+    if (Math.isNaN(quantity)) quantity = 0;
+    return quantity;
+  }
+
+  public static function addItem(itemName:String, amount:Float=1):Void {
+    var quantity:Float = itemHeld(itemName);
+    quantity += amount;
+    Reflect.setProperty(inventory.items, itemName, quantity);
+  }
+
   //Unlocks
   public static var unlocks(get, set):Dynamic;
 
