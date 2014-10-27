@@ -17,7 +17,7 @@ class NavGroup extends FlxSpriteGroup
   var titleText:FlxText;
   var burger:FlxButton;
 
-  public function new(name:String) {
+  public function new(name:String, enabled:Bool=true) {
     super();
     blackBarSprite = new FlxSprite();
     blackBarSprite.makeGraphic(FlxG.width, 60, 0xff000000);
@@ -33,6 +33,12 @@ class NavGroup extends FlxSpriteGroup
     titleText.setFormat("assets/fonts/AmaticSC-Bold.ttf", 42, 0xff9f79b7, "right");
     titleText.text = name;
     add(titleText);
+
+    if(!enabled) {
+      y = -60;
+      blackBarSprite.alpha = 0;
+      bloodText.alpha = titleText.alpha = 0;
+    }
   }
 
   override public function update():Void {
@@ -42,5 +48,13 @@ class NavGroup extends FlxSpriteGroup
       bloodText.text += "Fame: " + Math.floor(Reg.inventory.influence);
     }
     super.update();
+
+    bloodText.alpha = titleText.alpha;
+  }
+
+  public function enable():Void {
+    FlxTween.tween(this, { y: 0 }, 0.3, { ease: FlxEase.quartOut });
+    FlxTween.tween(blackBarSprite, { alpha: 0.55 }, 0.3, { ease: FlxEase.quartOut });
+    FlxTween.tween(titleText, { alpha: 1 }, 0.3, { ease: FlxEase.quartOut });
   }
 }

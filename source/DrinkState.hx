@@ -18,35 +18,38 @@ class DrinkState extends FlxState
   var candyButton:GradientButton;
   var shopButton:GradientButton;
 
+  var nav:NavGroup;
+
   override public function create():Void {
     super.create();
     Transition.finish();
 
     add(new BackgroundGroup());
 
-    outsideText = new FlxText(0,30,FlxG.width,FlxG.height);
+    outsideText = new FlxText(0,100,FlxG.width,FlxG.height);
     outsideText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 90, 0xffeadbf4, "center");
     add(outsideText);
 
-    candyButton = new GradientButton(FlxG.width/2 + 10, 410, 300, 100, "Treat");
+    candyButton = new GradientButton(FlxG.width/2 + 10, 480, 300, 100, "Treat");
     candyButton.onUp.callback = Resources.harvestInfluence;
     add(candyButton);
 
+/*
     shopButton = new GradientButton(FlxG.width/2 - 310, 530, 620, 100, "Return to your Lair");
     shopButton.onUp.callback = function():Void {
       Transition.to(new LairState());
     }
     shopButton.exists = false;
     add(shopButton);
+*/
 
-    bloodButton = new GradientButton(FlxG.width/2 - 310, 410, 300, 100, "Trick");
+    nav = new NavGroup("Archway", Reg.unlocks.lair);
+
+    bloodButton = new GradientButton(FlxG.width/2 - 310, 480, 300, 100, "Trick");
     bloodButton.onUp.callback = function():Void {
       Resources.harvestBlood();
-      if (!Reg.unlocks.lair && Reg.inventory.blood >= 10) {
-        shopButton.alpha = 0;
-        shopButton.y = 580;
-        FlxTween.tween(shopButton, { alpha: 0.8, y: 530 }, 0.3, { ease: FlxEase.quartOut });
-        FlxTween.tween(shopButton.label, { alpha: 1 }, 0.3, { ease: FlxEase.quartOut });
+      if (!Reg.unlocks.lair) {
+        nav.enable();
         Reg.unlocks.lair = true;
       }
     }
@@ -55,7 +58,7 @@ class DrinkState extends FlxState
     FlxG.mouse.useSystemCursor = true;
     FlxG.camera.antialiasing = true;
 
-    add(new NavGroup("Archway"));
+    add(nav);
   }
   
   override public function destroy():Void {
@@ -70,8 +73,5 @@ class DrinkState extends FlxState
     super.update();
 
     Resources.update();
-    if (Reg.unlocks.lair) {
-      shopButton.exists = true;
-    }
   }
 }

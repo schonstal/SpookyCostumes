@@ -18,20 +18,14 @@ class LairState extends FlxState
     Transition.finish();
 
     add(new BackgroundGroup());
-    add(new BloodText());
 
-    titleText = new FlxText(0,30,FlxG.width,FlxG.height);
-    titleText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 90, 0xffffffff, "center");
-    titleText.text = "lair";
-    add(titleText);
-
-    doorButton = new GradientButton(FlxG.width/2 - 310, 200, 620, 100, "Front Door");
+    doorButton = new GradientButton(FlxG.width/2 - 310, 100, 620, 100, "Front Door");
     doorButton.onUp.callback = function() {
       Transition.to(new DrinkState());
     };
     add(doorButton);
 
-    shopButton = new GradientButton(FlxG.width/2 - 310, 320, 620, 100, "Vampyre Shoppe");
+    shopButton = new GradientButton(FlxG.width/2 - 310, 220, 620, 100, "Vampyre Shoppe");
     shopButton.onUp.callback = function():Void {
       Transition.to(new ShopState());
     }

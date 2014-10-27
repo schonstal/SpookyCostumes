@@ -18,7 +18,6 @@ class ShopState extends FlxState
     Transition.finish();
 
     add(new BackgroundGroup());
-    add(new BloodText());
     
     var shopButton:GradientButton;
     //Make this a dynamic later? Or maybe have a class for an object.
@@ -44,6 +43,8 @@ class ShopState extends FlxState
     for (button in buttons) {
       add(button.infoGroup);
     }
+    
+    add(new NavGroup("Vampyre Shoppe"));
   }
   
   override public function destroy():Void {
