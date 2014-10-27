@@ -10,6 +10,7 @@ import flixel.util.FlxSave;
 class Reg
 {
   public var _save:FlxSave;
+  public var _locations:Dynamic;
 
   static var _instance;
 
@@ -64,8 +65,7 @@ class Reg
   static function get_unlocks():Dynamic {
     if(instance._save.data.unlocks == null) {
       instance._save.data.unlocks = {
-        trick: false,
-        lair: false
+        locations: ["Lair"]
       };
     }
     return instance._save.data.unlocks;
@@ -101,7 +101,7 @@ class Reg
           }
         },
         "Beguiler": {
-          description: "Spellbinds trick-or-treaters.",
+          description: "Enthralls trick-or-treaters.",
           cost: {
             blood: 100
           }
@@ -124,6 +124,38 @@ class Reg
 
   public static function item(itemName:String):Dynamic {
     return Reflect.getProperty(items, itemName);
+  }
+
+  //Available locations
+  public static var locations(get, set):Dynamic;
+
+  static function get_locations():Dynamic {
+    if(instance._locations == null) {
+      instance._locations = {
+        "Lair": {
+          state: LairState
+        },
+        "Archway": {
+          state: DrinkState
+        },
+        "Vault": {
+          state: LairState
+        },
+        "Hell": {
+          state: LairState
+        }
+      };
+    }
+    return instance._locations;
+  }
+
+  static function set_locations(value:Dynamic):Dynamic {
+    instance._locations = value;
+    return instance._locations;
+  }
+
+  public static function location(locationName:String):Dynamic {
+    return Reflect.getProperty(locations, locationName);
   }
 
   public function new() {

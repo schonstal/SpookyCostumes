@@ -43,14 +43,14 @@ class DrinkState extends FlxState
     add(shopButton);
 */
 
-    nav = new NavGroup("Archway", Reg.unlocks.lair);
+    nav = new NavGroup("Front Door", Reg.unlocks.menu);
 
     bloodButton = new GradientButton(FlxG.width/2 - 310, 480, 300, 100, "Trick");
     bloodButton.onUp.callback = function():Void {
       Resources.harvestBlood();
-      if (!Reg.unlocks.lair) {
+      if (!Reg.unlocks.menu) {
         nav.enable();
-        Reg.unlocks.lair = true;
+        Reg.unlocks.menu = true;
       }
     }
     add(bloodButton);
