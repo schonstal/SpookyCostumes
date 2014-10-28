@@ -95,30 +95,36 @@ class Reg
       instance._save.data.items = {
         "Pumpkin": {
           description: "A decorative squash.",
+          purchaseText: "A fine choice. Perfect for carving!",
           cost: {
             blood: 10
           }
         },
         "Candle": {
           description: "A long, waxy stick.\nGood for parties.",
+          purchaseText: "Wonderful! These really set the mood.",
           cost: {
             blood: 10
           }
         },
         "Basement Key": {
           description: "Unlocks the basement.",
+          purchaseText: "I wonder what's down there...",
+          max: 1,
           cost: {
             blood: 50
           }
         },
         "Beguiler": {
           description: "Enthralls trick-or-treaters.",
+          purchaseText: "They will happily give you their blood; they're having fun!",
           cost: {
             blood: 100
           }
         },
         "Cauldron": {
           description: "Bubble bubble toil and trouble.",
+          purchaseText: "lol this does nothing",
           cost: {
             blood: 1000
           }

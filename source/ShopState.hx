@@ -12,6 +12,9 @@ class ShopState extends FlxState
   var infoGroup:ItemInfoGroup;
   var dialog:DialogGroup;
 
+  var width = 350;
+  var height = 100;
+
   var buttons:Array<GradientButton> = [];
 
   override public function create():Void {
@@ -24,25 +27,28 @@ class ShopState extends FlxState
     dialog.text = "I've got a lot of stuff on sale for Halloween. Take a look!";
     add(dialog);
     
-    var shopButton:GradientButton;
     //Make this a dynamic later? Or maybe have a class for an object.
-    var availableItems:Array<String> = ["Candle", "Pumpkin", "Cauldron", "Basement Key", "Beguiler"];//, "JoJo", "Uhg", "Candy Bar", "A Thing"];
+    var availableItems:Array<String> = ["Candle", "Pumpkin", "Cauldron", "Beguiler"];//, "JoJo", "Uhg", "Candy Bar", "A Thing"];
+
+    if (!Reg.unlocks.basement) availableItems.push("Basement Key");
     
     var i:Int = 0;
-    for (item in availableItems) {
-      var width = 350;
-      var height = 100;
-      shopButton = new GradientButton(120 + (i%2 * (width + 10)), 90 + Math.floor(i/2) * (height + 10), width, height, item, new ItemInfoGroup(item));
+    for (itemName in availableItems) {
+      var shopButton:GradientButton;
+      shopButton = new GradientButton(120 + (i%2 * (width + 10)), 90 + Math.floor(i/2) * (height + 10), width, height, itemName, new ItemInfoGroup(itemName));
       shopButton.onUp.callback = function():Void {
-        if (Reg.inventory.blood > Reg.item(item).cost.blood) {
-          Reg.inventory.blood -= Math.floor(Reg.item(item).cost.blood);
-          Reg.addItem(item);
-          dialog.text = "A fine choice.";
-          if (item == "Basement Key") {
+        var item:Dynamic = Reg.item(itemName);
+        if (Reg.inventory.blood < item.cost.blood) {
+          dialog.text = "You don't have enough blood to buy that.";
+        } else if (!Math.isNaN(item.max) && item.max <= Reg.itemHeld(itemName)) {
+          dialog.text = "You can't carry any more of those.";
+        } else {
+          Reg.inventory.blood -= Math.floor(item.cost.blood);
+          Reg.addItem(itemName);
+          dialog.text = item.purchaseText == null ? "A fine choice." : item.purchaseText;
+          if (itemName == "Basement Key") {
             Reg.unlocks.basement = true;
           }
-        } else {
-          dialog.text = "You don't have enough blood to buy that.";
         }
       }
       add(shopButton);
@@ -65,13 +71,18 @@ class ShopState extends FlxState
   }
 
   override public function update():Void {
+    var i:Int = 0;
     for (button in buttons) {
-      var item:String = button.label.text;
-      if (Reg.inventory.blood > Reg.item(item).cost.blood) {
-        if(!button.enabled) button.enable();
-      } else {
+      var itemName:String = button.label.text;
+      var item:Dynamic = Reg.item(itemName);
+      if (!Math.isNaN(item.max) && item.max <= Reg.itemHeld(itemName) || Reg.inventory.blood < item.cost.blood) {
         if(button.enabled) button.disable();
+      } else {
+        if(!button.enabled) button.enable();
       }
+      button.x = 120 + (i%2 * (width + 10));
+      button.y = 90 + Math.floor(i/2) * (height + 10);
+      i++;
     }
     super.update();
     Resources.update();

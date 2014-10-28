@@ -11,7 +11,7 @@ class Resources {
 
     lastTime = Timer.stamp();
     
-    if (FlxG.keys.justPressed.Q) Reg.inventory.kids += 10000;
+    if (FlxG.keys.justPressed.Q) Reg.inventory.influence += 1000000;
   }
 
   public static function harvestBlood() {

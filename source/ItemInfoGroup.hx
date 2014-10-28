@@ -84,5 +84,8 @@ class ItemInfoGroup extends InfoGroup
     ownedText.alpha = infoBox.alpha;
 
     ownedText.text = "Owned: " + Reg.itemHeld(itemName);
+    if (!Math.isNaN(item.max)) {
+      ownedText.text += "/" + item.max;
+    }
   }
 }

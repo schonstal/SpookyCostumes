@@ -94,7 +94,7 @@ class GradientButton extends FlxButton
     endHover();
   }
 
-  private function endHover():Void {
+  public function endHover():Void {
     blurTween.active = false;
     glowFilter.blurX = glowFilter.blurY = 0;
     label.color = 0xffffffff;
@@ -102,7 +102,7 @@ class GradientButton extends FlxButton
     if (infoGroup != null) infoGroup.hide();
   }
 
-  private function startHover():Void {
+  public function startHover():Void {
     blurTween.active = true;
     glowFilter.blurX = glowFilter.blurY = 10;
     label.color = 0xffe9a56d;
