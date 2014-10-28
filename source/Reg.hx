@@ -163,8 +163,8 @@ class Reg
           description: "The Danse Macabre. Rule All Hallow's Eve.",
           cost: {
             thralls: 666,
-            fame: 100,
-            blood: 75000,
+            fame: 7500,
+            blood: 2000000,
             "Ancient Relic": 1
           }
         }
