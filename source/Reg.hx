@@ -117,7 +117,7 @@ class Reg
         },
         "Beguiler": {
           description: "Enthralls trick-or-treaters.",
-          purchaseText: "They will happily give you their blood; they're having fun!",
+          purchaseText: "Kids will happily give you their blood; they're having fun!",
           cost: {
             blood: 100
           }
