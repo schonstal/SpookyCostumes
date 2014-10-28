@@ -8,10 +8,11 @@ class Resources {
     var timeDifference = (lastTime > 0 ? Timer.stamp() - lastTime : 0);
 
     Reg.inventory.kids += timeDifference * Math.log(Reg.inventory.influence + Math.exp(1));
+    Reg.inventory.thralls += timeDifference * Reg.itemHeld("Beguiler")/100;
 
     lastTime = Timer.stamp();
     
-    if (FlxG.keys.justPressed.Q) Reg.inventory.influence += 1000000;
+    if (FlxG.keys.justPressed.Q) Reg.inventory.blood += 1000;
   }
 
   public static function harvestBlood() {
@@ -22,7 +23,7 @@ class Resources {
 
   public static function harvestInfluence() {
     if (Reg.inventory.influence == null) Reg.inventory.influence = 0;
-    Reg.inventory.influence += Reg.inventory.kids/100;
+    Reg.inventory.influence += Reg.inventory.kids / 100;
     Reg.inventory.kids = 0;
   }
 }

@@ -6,13 +6,13 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 
-class ShopState extends FlxState
+class CauldronState extends FlxState
 {
   var titleText:FlxText;
   var infoGroup:ItemInfoGroup;
   var dialog:DialogGroup;
 
-  var width = 300;
+  var width = 610;
   var height = 80;
 
   var buttons:Array<GradientButton> = [];
@@ -24,19 +24,16 @@ class ShopState extends FlxState
     add(new BackgroundGroup());
 
     dialog = new DialogGroup();
-    dialog.text = "I've got a lot of stuff on sale for Halloween. Take a look!";
+    dialog.text = "Care to join me for a dance? Ehehehehe.";
     add(dialog);
     
     //Make this a dynamic later? Or maybe have a class for an object.
-    var availableItems:Array<String> = ["Candle", "Pumpkin", "Beguiler"];//, "JoJo", "Uhg", "Candy Bar", "A Thing"];
+    var availableItems:Array<String> = ["Rite of The Hallow", "Rite of Blood", "Rite of Majesty"];
 
-    if (!Reg.unlocks.basement) availableItems.push("Basement Key");
-    if (!Reg.unlocks.cauldron) availableItems.push("Cauldron");
-    
     var i:Int = 0;
     for (itemName in availableItems) {
       var shopButton:GradientButton;
-      shopButton = new GradientButton(170 + (i%2 * (width + 10)), 115 + Math.floor(i/2) * (height + 10), width, height, itemName, new ItemInfoGroup(itemName));
+      shopButton = new GradientButton(170, 115 + i * (height + 10), width, height, itemName, new ItemInfoGroup(itemName));
       shopButton.onUp.callback = function():Void {
         var item:Dynamic = Reg.item(itemName);
         if (Reg.inventory.blood < item.cost.blood) {
@@ -47,12 +44,6 @@ class ShopState extends FlxState
           Reg.inventory.blood -= Math.floor(item.cost.blood);
           Reg.addItem(itemName);
           dialog.text = item.purchaseText == null ? "A fine choice." : item.purchaseText;
-          if (itemName == "Basement Key") {
-            Reg.unlocks.basement = true;
-          }
-          if (itemName == "Cauldron") {
-            Reg.unlocks.cauldron = true;
-          }
         }
       }
       add(shopButton);
@@ -62,12 +53,11 @@ class ShopState extends FlxState
 
     FlxG.camera.antialiasing = true;
 
-
     for (button in buttons) {
       add(button.infoGroup);
     }
     
-    add(new NavGroup("Vampyre Shoppe"));
+    add(new NavGroup("Witch Queen's Cauldron"));
   }
   
   override public function destroy():Void {
@@ -84,8 +74,8 @@ class ShopState extends FlxState
       } else {
         if(!button.enabled) button.enable();
       }
-      button.x = 170 + (i%2 * (width + 10));
-      button.y = 115 + Math.floor(i/2) * (height + 10);
+      button.x = 170;
+      button.y = 115 + i * (height + 10);
       i++;
     }
     super.update();

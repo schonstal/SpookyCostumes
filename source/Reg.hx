@@ -47,6 +47,7 @@ class Reg
       instance._save.data.inventory = {
         blood: 0,
         kids: 0,
+        thralls: 0,
         influence: 0
       };
     }
@@ -95,16 +96,16 @@ class Reg
       instance._save.data.items = {
         "Pumpkin": {
           description: "A decorative squash.",
-          purchaseText: "A fine choice. Perfect for carving!",
+          purchaseText: "Great for carving!",
           cost: {
-            blood: 10
+            blood: 20
           }
         },
         "Candle": {
           description: "A long, waxy stick.\nGood for parties.",
-          purchaseText: "Wonderful! These really set the mood.",
+          purchaseText: "Perfectly sized for a pumpkin!",
           cost: {
-            blood: 10
+            blood: 20
           }
         },
         "Basement Key": {
@@ -112,28 +113,53 @@ class Reg
           purchaseText: "I wonder what's down there...",
           max: 1,
           cost: {
-            blood: 50
+            blood: 100
           }
         },
         "Beguiler": {
           description: "Enthralls trick-or-treaters.",
           purchaseText: "Kids will happily give you their blood; they're having fun!",
           cost: {
-            blood: 100
+            blood: 250
           }
         },
         "Cauldron": {
           description: "Bubble bubble toil and trouble.",
-          purchaseText: "lol this does nothing",
+          purchaseText: "I don't know what this is used for; I got it from the witch queen. " +
+                        "She said, \"don't let this fall into the wrong hands!\" or something weird like that.",
+          max: 1,
           cost: {
-            blood: 1000
+            blood: 10000
           }
         },
         "Jack-O-Lantern": {
-          description: "Artisanal carved pumpkin. Attracts kids.",
+          description: "Artisanal carved pumpkin.",
           cost: {
             "Pumpkin": 1,
             "Candle": 1
+          }
+        },
+        "Rite of Blood": {
+          description: "Magically increases blood harvested.",
+          cost: {
+            thralls: 10,
+            blood: 2500
+          }
+        },
+        "Rite of Majesty": {
+          description: "Magically increases your fame's influence.",
+          cost: {
+            thralls: 10,
+            fame: 25
+          }
+        },
+        "Rite of The Hallow": {
+          description: "The Danse Macabre. Rule All Hallow's Eve.",
+          cost: {
+            thralls: 666,
+            fame: 100,
+            blood: 75000,
+            "Ancient Relic": 1
           }
         }
       };

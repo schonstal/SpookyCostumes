@@ -19,30 +19,32 @@ class BasementState extends FlxState
     add(new BackgroundGroup());
 
     dialog = new DialogGroup();
-    dialog.text = "Bring me your candles and pumpkins and I can make you Jack-O-Lanterns!\n\nKids love 'em.";
     add(dialog);
+
+    if (Reg.inventory.Pumpkin >= 1 && Reg.inventory.Candle >= 1) {
+      dialog.text = "Oh, you have just what I need! I could make you a lovely Jack-O-Lantern, if you like.";
     
-    var shopButton:GradientButton;
-    
-    var width = 700;
-    var height = 150;
-    shopButton = new GradientButton(120, 150, width, height, "Carve Pumpkins", new ItemInfoGroup("Jack-O-Lantern"));
-    shopButton.onUp.callback = function():Void {
-      if (Reg.inventory.Pumpkin >= 1 && Reg.inventory.Candle >= 1) {
-        Reg.inventory.Pumpkin--;
-        Reg.inventory.Candle--;
-        Reg.addItem("Jack-O-Lantern");
-        dialog.text = "My pleasure! As always.";
-        Reg.inventory.influence++;
-      } else {
-        dialog.text = "I can't do it without the right parts.";
+      var width = 610;
+      var height = 120;
+      shopButton = new GradientButton(170, 115, width, height, "Carve Pumpkin", new ItemInfoGroup("Jack-O-Lantern"));
+      shopButton.onUp.callback = function():Void {
+        if (Reg.inventory.Pumpkin >= 1 && Reg.inventory.Candle >= 1) {
+          Reg.inventory.Pumpkin--;
+          Reg.inventory.Candle--;
+          Reg.addItem("Jack-O-Lantern");
+          dialog.text = "Here's a Jack-O-Lantern!";
+          Reg.inventory.influence++;
+        } else {
+          dialog.text = "I can't make any more Jack-O-Lanterns; you'll need to bring me the components.";
+        }
       }
+      add(shopButton);
+      add(shopButton.infoGroup);
+    } else {
+      dialog.text = "If I had a pumpkin and a candle, I would make you a wonderful Jack-O-Lantern.";
     }
-    add(shopButton);
 
     FlxG.camera.antialiasing = true;
-
-    add(shopButton.infoGroup);
 
     add(new NavGroup("Basement"));
   }
