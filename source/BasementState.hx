@@ -15,6 +15,7 @@ class BasementState extends FlxState
   override public function create():Void {
     super.create();
     Transition.finish();
+    Reg.unlockLocation("Basement");
 
     add(new BackgroundGroup());
 

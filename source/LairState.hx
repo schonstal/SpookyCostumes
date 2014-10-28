@@ -18,6 +18,7 @@ class LairState extends FlxState
   override public function create():Void {
     super.create();
     Transition.finish();
+    Reg.unlockLocation("Door");
 
     add(new BackgroundGroup());
 

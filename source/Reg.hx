@@ -88,6 +88,12 @@ class Reg
     return instance._save.data.unlocks;
   }
 
+  public static function unlockLocation(location:String):Void {
+    if (Reg.unlocks.locations.indexOf(location) < 0) {
+      Reg.unlocks.locations.push(location);
+    }
+  }
+
   //Available items
   public static var items(get, set):Dynamic;
 
@@ -185,14 +191,17 @@ class Reg
         "Lair": {
           state: LairState
         },
-        "Archway": {
+        "Door": {
           state: DrinkState
         },
-        "Vault": {
-          state: LairState
+        "Shoppe": {
+          state: ShopState
         },
-        "Hell": {
-          state: LairState
+        "Basement": {
+          state: BasementState
+        },
+        "Cauldron": {
+          state: CauldronState
         }
       };
     }

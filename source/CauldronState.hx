@@ -20,11 +20,12 @@ class CauldronState extends FlxState
   override public function create():Void {
     super.create();
     Transition.finish();
+    Reg.unlockLocation("Cauldron");
 
     add(new BackgroundGroup());
 
     dialog = new DialogGroup();
-    dialog.text = "Care to join me for a dance? Ehehehehe.";
+    dialog.text = "With this we will finally be able control the Spirit of Halloween, bring eternal nightfall upon the world and reign in this eventide kingdom for the rest of time!";
     add(dialog);
     
     //Make this a dynamic later? Or maybe have a class for an object.

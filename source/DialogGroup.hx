@@ -19,7 +19,7 @@ class DialogGroup extends FlxSpriteGroup
     dialogBox = new DialogBox(X, Y, Width, Height);
     add(dialogBox);
 
-    dialogText = new FlxText(X+40, Y+20, Width-80);
+    dialogText = new FlxText(X+30, Y+15, Width-80);
     dialogText.setFormat("assets/fonts/RobotoSlab-Thin.ttf", 42, 0xffeadbf4, "left");
     add(dialogText);
   }

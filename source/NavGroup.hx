@@ -34,7 +34,7 @@ class NavGroup extends FlxSpriteGroup
     var locations:Array<Dynamic> = Reg.unlocks.locations;
     for(location in locations) {
       i++;
-      locationButton = new FlxText(0, 60 * i, 100, location);
+      locationButton = new FlxText(0, 60 * i, 150, location);
       locationButton.setFormat("assets/fonts/AmaticSC-Bold.ttf", 42, 0xff9f79b7, "left");
       locationButton.alpha = 0;
       add(locationButton);
@@ -78,7 +78,7 @@ class NavGroup extends FlxSpriteGroup
       bloodText.text += "    Fame: " + Math.floor(Reg.inventory.influence);
     }
     if (Reg.inventory.thralls > 0) {
-      bloodText.text += "    Thralls: " + Math.floor(Reg.inventory.thralls);
+      bloodText.text += "    Thralls: " + Math.floor(Reg.inventory.thralls);// + " (" + Reg.inventory.Beguiler + "/min)";
     }
     super.update();
 
@@ -92,7 +92,7 @@ class NavGroup extends FlxSpriteGroup
       inMenu = true;
     }
 
-    if(inMenu && FlxG.mouse.x > 110) {
+    if(inMenu && FlxG.mouse.x > 160) {
       burger.color = 0xff9f79b7;
       FlxTween.tween(gradient, { alpha: 0 }, 0.3, { ease: FlxEase.quartOut });
       for (locationButton in locationButtons) {

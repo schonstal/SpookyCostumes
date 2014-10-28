@@ -20,6 +20,7 @@ class ShopState extends FlxState
   override public function create():Void {
     super.create();
     Transition.finish();
+    Reg.unlockLocation("Shoppe");
 
     add(new BackgroundGroup());
 
