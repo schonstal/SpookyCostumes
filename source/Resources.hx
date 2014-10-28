@@ -8,7 +8,7 @@ class Resources {
     var timeDifference = (lastTime > 0 ? Timer.stamp() - lastTime : 0);
 
     Reg.inventory.kids += timeDifference * Math.log(Reg.inventory.influence + Math.exp(1));
-    Reg.inventory.thralls += timeDifference * Reg.itemHeld("Beguiler")/60;
+    Reg.inventory.thralls += timeDifference * Reg.itemHeld("Beguiler")/100;
 
     lastTime = Timer.stamp();
     
