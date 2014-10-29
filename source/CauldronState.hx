@@ -37,15 +37,16 @@ class CauldronState extends FlxState
       shopButton = new GradientButton(170, 115 + i * (height + 10), width, height, itemName, new ItemInfoGroup(itemName));
       shopButton.onUp.callback = function():Void {
         var item:Dynamic = Reg.item(itemName);
-        if (Reg.inventory.blood < item.cost.blood) {
-          dialog.text = "You don't have enough blood to buy that.";
-        } else if (!Math.isNaN(item.max) && item.max <= Reg.itemHeld(itemName)) {
-          dialog.text = "You can't carry any more of those.";
-        } else {
-          Reg.inventory.blood -= Math.floor(item.cost.blood);
-          Reg.addItem(itemName);
-          dialog.text = item.purchaseText == null ? "A fine choice." : item.purchaseText;
+        for (cost in Reflect.fields(item.cost)) {
+          var price:Float = Reflect.getProperty(item.cost, cost);
+          if (Reg.itemHeld(cost) < price) {
+            dialog.text = "You need more " + cost + " to perform this ritual.";
+            return;
+          }
+          Reg.addItem(cost, -price);
         }
+        dialog.text = item.purchaseText == null ? "A fine choice." : item.purchaseText;
+        Reg.addItem(itemName);
       }
       add(shopButton);
       buttons.push(shopButton);
@@ -70,7 +71,12 @@ class CauldronState extends FlxState
     for (button in buttons) {
       var itemName:String = button.label.text;
       var item:Dynamic = Reg.item(itemName);
-      if (!Math.isNaN(item.max) && item.max <= Reg.itemHeld(itemName) || Reg.inventory.blood < item.cost.blood) {
+      var canAfford:Bool = true;
+      for (cost in Reflect.fields(item.cost)) {
+        if(Reflect.getProperty(item.cost, cost) > Reg.itemHeld(item)) canAfford = false;
+      }
+
+      if (!Math.isNaN(item.max) && item.max <= Reg.itemHeld(itemName) || !canAfford) {
         if(button.enabled) button.disable();
       } else {
         if(!button.enabled) button.enable();

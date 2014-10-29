@@ -34,7 +34,7 @@ class BasementState extends FlxState
           Reg.inventory.Candle--;
           Reg.addItem("Jack-O-Lantern");
           dialog.text = "Here's a Jack-O-Lantern!";
-          Reg.inventory.influence++;
+          Reg.inventory.fame++;
         } else {
           dialog.text = "I can't make any more Jack-O-Lanterns; you'll need to bring me the components.";
         }

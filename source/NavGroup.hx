@@ -74,8 +74,8 @@ class NavGroup extends FlxSpriteGroup
   override public function update():Void {
     bloodText.text = "Blood: " + Math.floor(Reg.inventory.blood);
 
-    if (Math.floor(Reg.inventory.influence) > 0) {
-      bloodText.text += "    Fame: " + Math.floor(Reg.inventory.influence);
+    if (Math.floor(Reg.inventory.fame) > 0) {
+      bloodText.text += "    Fame: " + Math.floor(Reg.inventory.fame);
     }
     if (Reg.inventory.thralls > 0) {
       bloodText.text += "    Thralls: " + Math.floor(Reg.inventory.thralls);// + " (" + Reg.inventory.Beguiler + "/min)";

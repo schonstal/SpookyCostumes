@@ -48,7 +48,7 @@ class Reg
         blood: 0,
         kids: 0,
         thralls: 0,
-        influence: 0
+        fame: 0
       };
     }
     return instance._save.data.inventory;
@@ -104,14 +104,14 @@ class Reg
           description: "A decorative squash.",
           purchaseText: "Great for carving!",
           cost: {
-            blood: 20
+            blood: 30
           }
         },
         "Candle": {
           description: "A long, waxy stick.\nGood for parties.",
           purchaseText: "Perfectly sized for a pumpkin!",
           cost: {
-            blood: 20
+            blood: 10
           }
         },
         "Basement Key": {
@@ -125,6 +125,7 @@ class Reg
         "Beguiler": {
           description: "Enthralls trick-or-treaters.",
           purchaseText: "Kids will happily give you their blood; they're having fun!",
+          max: 10,
           cost: {
             blood: 250
           }
@@ -135,7 +136,7 @@ class Reg
                         "She said, \"don't let this fall into the wrong hands!\" or something weird like that.",
           max: 1,
           cost: {
-            blood: 10000
+            blood: 1000
           }
         },
         "Jack-O-Lantern": {
@@ -147,6 +148,8 @@ class Reg
         },
         "Rite of Blood": {
           description: "Magically increases blood harvested.",
+          purchaseText: "We will suck the blood of the world!",
+          ownedText: "Completed",
           cost: {
             thralls: 10,
             blood: 2500
@@ -154,6 +157,8 @@ class Reg
         },
         "Rite of Majesty": {
           description: "Magically increases your fame's influence.",
+          purchaseText: "Our pumpkins seem to have a much better conversion rate!",
+          ownedText: "Completed",
           cost: {
             thralls: 10,
             fame: 25
@@ -161,6 +166,8 @@ class Reg
         },
         "Rite of The Hallow": {
           description: "The Danse Macabre. Rule All Hallow's Eve.",
+          puchaseText: "You win!",
+          ownedText: "Completed",
           cost: {
             thralls: 666,
             fame: 7500,

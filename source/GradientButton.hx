@@ -84,14 +84,15 @@ class GradientButton extends FlxButton
   public function enable():Void {
     enabled = true;
     labelOffsets[2] = FlxPoint.get(-35, height * 0.075 + 1);
-    endHover();
+    label.alpha = 1;
+    alpha = 0.7;
   }
 
   public function disable():Void {
     enabled = false;
     labelOffsets[2] = FlxPoint.get(-35, height * 0.075);
     label.alpha = 0.3;
-    endHover();
+    alpha = 0.3;
   }
 
   public function endHover():Void {
