@@ -17,7 +17,7 @@ class Resources {
 
   public static function harvestBlood() {
     if (Reg.inventory.blood == null) Reg.inventory.blood = 0;
-    Reg.inventory.blood += Reg.inventory.kids;
+    Reg.inventory.blood += Reg.inventory.kids + (0.1 * Reg.itemHeld("Rite of Blood"));
     Reg.inventory.kids = 0;
   }
 

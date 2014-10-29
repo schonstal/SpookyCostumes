@@ -174,6 +174,38 @@ class Reg
             blood: 2000000,
             "Ancient Relic": 1
           }
+        },
+        "Haunted Burg": {
+          description: "The local neighborhood.",
+          purchaseText: "Stephanie will have a great time in the burg.",
+          ownedText: "Assigned",
+          max: 1,
+          cost: {
+            thralls: 1,
+            blood: 1000
+          }
+        },
+        "Ancient Boneyard": {
+          description: "Where the dead go to rest.",
+          purchaseText: "He's so excited! James loves skeletons!",
+          ownedText: "Assigned",
+          max: 1,
+          cost: {
+            thralls: 1,
+            blood: 2500,
+            "Skeleton Key": 1
+          }
+        },
+        "Darkwood Forest": {
+          description: "It's dark. It's wood. It's a forest.",
+          purchaseText: "He's so excited! James loves skeletons!",
+          ownedText: "Assigned",
+          max: 1,
+          cost: {
+            thralls: 1,
+            blood: 5000,
+            "Unobtainium": 1
+          }
         }
       };
     }

@@ -43,6 +43,9 @@ class CauldronState extends FlxState
             dialog.text = "You need more " + cost + " to perform this ritual.";
             return;
           }
+        }
+        for (cost in Reflect.fields(item.cost)) {
+          var price:Float = Reflect.getProperty(item.cost, cost);
           Reg.addItem(cost, -price);
         }
         dialog.text = item.purchaseText == null ? "A fine choice." : item.purchaseText;

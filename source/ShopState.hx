@@ -54,6 +54,9 @@ class ShopState extends FlxState
           if (itemName == "Cauldron") {
             Reg.unlocks.cauldron = true;
           }
+          if (itemName == "Beguiler") {
+            Reg.unlocks.scrying = true;
+          }
         }
       }
       add(shopButton);

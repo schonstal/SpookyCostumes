@@ -69,13 +69,19 @@ class ItemInfoGroup extends InfoGroup
 
     var i:Int = 0;
     for (text in costTexts) {
+      var price:Float = Reflect.getProperty(item.cost,Reflect.fields(item.cost)[i]);
+      var held:Float = Math.floor(Reg.itemHeld(Reflect.fields(item.cost)[i]));
       text.x = infoBox.x + 22;
       text.y = infoBox.y + 160 + 60 * i;
       text.alpha = infoBox.alpha;
-      text.text = Reflect.fields(item.cost)[i] + ": "
-                  + Reflect.getProperty(item.cost,Reflect.fields(item.cost)[i]);
+      text.text = Reflect.fields(item.cost)[i] + ": " + price;
 
-      text.text += " (" + Math.floor(Reg.itemHeld(Reflect.fields(item.cost)[i])) + ")";
+      text.text += " (" + held + ")";
+      if(price >= held) {
+        text.color = 0xfff08382;
+      } else {
+        text.color = 0xffe1d0ec;
+      }
       i++;
     }
 

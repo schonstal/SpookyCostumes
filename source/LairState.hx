@@ -14,6 +14,7 @@ class LairState extends FlxState
   var shopButton:GradientButton;
   var basementButton:GradientButton;
   var cauldronButton:GradientButton;
+  var scryButton:GradientButton;
 
   override public function create():Void {
     super.create();
@@ -42,8 +43,16 @@ class LairState extends FlxState
       add(basementButton);
     }
 
+    if (Reg.unlocks.scrying) {
+      scryButton = new GradientButton(FlxG.width/2 - 310, 460, 620, 100, "Scrying Pool");
+      scryButton.onUp.callback = function():Void {
+        Transition.to(new ScryState());
+      }
+      add(scryButton);
+    }
+
     if (Reg.unlocks.cauldron) {
-      cauldronButton = new GradientButton(FlxG.width/2 - 310, 460, 620, 100, "Witch Queen's Cauldron");
+      cauldronButton = new GradientButton(FlxG.width/2 - 310, 580, 620, 100, "Witch Queen's Cauldron");
       cauldronButton.onUp.callback = function():Void {
         Transition.to(new CauldronState());
       }
