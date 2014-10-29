@@ -77,7 +77,7 @@ class ItemInfoGroup extends InfoGroup
       text.text = Reflect.fields(item.cost)[i] + ": " + price;
 
       text.text += " (" + held + ")";
-      if(price >= held) {
+      if(price > held) {
         text.color = 0xfff08382;
       } else {
         text.color = 0xffe1d0ec;

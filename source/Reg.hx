@@ -146,6 +146,14 @@ class Reg
             "Candle": 1
           }
         },
+        "Moon Dust": {
+          description: "Highly valued by werewolves.",
+          purchaseText: "This is some really high quality dust! None of that waxing gibbous garbage--it's pure full-moon!",
+          cost: {
+          },
+          max: 1,
+        },
+        //Rites
         "Rite of Blood": {
           description: "Magically increases blood harvested.",
           purchaseText: "We will suck the blood of the world!",
@@ -175,6 +183,7 @@ class Reg
             "Ancient Relic": 1
           }
         },
+        //Scries
         "Haunted Burg": {
           description: "The local neighborhood.",
           purchaseText: "Stephanie will have a great time in the burg.",
@@ -204,7 +213,7 @@ class Reg
           cost: {
             thralls: 1,
             blood: 5000,
-            "Unobtainium": 1
+            "Moon Dust": 1
           }
         }
       };
@@ -241,6 +250,9 @@ class Reg
         },
         "Cauldron": {
           state: CauldronState
+        },
+        "Space": {
+          state: SpaceState
         }
       };
     }

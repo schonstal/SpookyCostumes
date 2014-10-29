@@ -11,6 +11,7 @@ class BasementState extends FlxState
   var dialog:DialogGroup;
 
   var shopButton:GradientButton;
+  var unlockedScrying:Bool = false;
 
   override public function create():Void {
     super.create();
@@ -33,10 +34,17 @@ class BasementState extends FlxState
           Reg.inventory.Pumpkin--;
           Reg.inventory.Candle--;
           Reg.addItem("Jack-O-Lantern");
+          if(Reg.itemHeld("Jack-O-Lantern") >= 10 && !Reg.unlocks.scrying) {
+            unlockedScrying = true;
+            Reg.unlocks.scrying = true;
+          }
           dialog.text = "Here's a Jack-O-Lantern!";
           Reg.inventory.fame++;
         } else {
           dialog.text = "I can't make any more Jack-O-Lanterns; you'll need to bring me the components.";
+        }
+        if (unlockedScrying) {
+          dialog.text = "Wow! You really like Jack-O-Lanterns!!\nI know it's not much, but why don't you take this weird thing I found? I haven't had a friend in a long time...";
         }
       }
       add(shopButton);

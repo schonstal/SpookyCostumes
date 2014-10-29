@@ -13,6 +13,7 @@ class Resources {
     lastTime = Timer.stamp();
     
     if (FlxG.keys.justPressed.Q) Reg.inventory.blood += 1000;
+    if (FlxG.keys.justPressed.SPACE) Transition.to(new SpaceState());
   }
 
   public static function harvestBlood() {
