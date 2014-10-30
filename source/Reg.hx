@@ -10,10 +10,13 @@ import flixel.util.FlxSave;
 class Reg
 {
   public var _save:FlxSave;
+  public var _locations:Dynamic;
 
   static var _instance;
 
   static var instance(get, set):Reg;
+
+  public static var newLocation:String = "";
 
   static function get_instance():Reg {
     if (_instance == null) {
@@ -46,8 +49,8 @@ class Reg
       instance._save.data.inventory = {
         blood: 0,
         kids: 0,
-        influence: 0,
-        items: {}
+        thralls: 0,
+        fame: 0
       };
     }
     return instance._save.data.inventory;
@@ -58,14 +61,25 @@ class Reg
     return instance._save.data.inventory;
   }
 
+  public static function itemHeld(itemName:String):Float {
+    var quantity:Float = Reflect.getProperty(inventory, itemName);
+    if (Math.isNaN(quantity)) quantity = 0;
+    return quantity;
+  }
+
+  public static function addItem(itemName:String, amount:Float=1):Void {
+    var quantity:Float = itemHeld(itemName);
+    quantity += amount;
+    Reflect.setProperty(inventory, itemName, quantity);
+  }
+
   //Unlocks
   public static var unlocks(get, set):Dynamic;
 
   static function get_unlocks():Dynamic {
     if(instance._save.data.unlocks == null) {
       instance._save.data.unlocks = {
-        trick: false,
-        lair: false
+        locations: ["Lair"]
       };
     }
     return instance._save.data.unlocks;
@@ -76,6 +90,13 @@ class Reg
     return instance._save.data.unlocks;
   }
 
+  public static function unlockLocation(location:String):Void {
+    if (Reg.unlocks.locations.indexOf(location) < 0) {
+      Reg.unlocks.locations.push(location);
+      newLocation = location;
+    }
+  }
+
   //Available items
   public static var items(get, set):Dynamic;
 
@@ -84,32 +105,118 @@ class Reg
       instance._save.data.items = {
         "Pumpkin": {
           description: "A decorative squash.",
+          purchaseText: "Great for carving!",
           cost: {
-            blood: 10
+            blood: 30
           }
         },
         "Candle": {
           description: "A long, waxy stick.\nGood for parties.",
+          purchaseText: "Perfectly sized for a pumpkin!",
           cost: {
             blood: 10
           }
         },
         "Basement Key": {
           description: "Unlocks the basement.",
-          cost: {
-            blood: 50
-          }
-        },
-        "Beguiler": {
-          description: "Spellbinds trick-or-treaters.",
+          purchaseText: "I wonder what's down there...",
+          max: 1,
           cost: {
             blood: 100
           }
         },
+        "Beguiler": {
+          description: "Enthralls trick-or-treaters.",
+          purchaseText: "Kids will happily give you their blood; they're having fun!",
+          max: 10,
+          cost: {
+            blood: 250
+          }
+        },
         "Cauldron": {
           description: "Bubble bubble toil and trouble.",
+          purchaseText: "I don't know what this is used for; I got it from the witch queen. " +
+                        "She said, \"don't let this fall into the wrong hands!\" or something weird like that.",
+          max: 1,
           cost: {
             blood: 1000
+          }
+        },
+        "Jack-O-Lantern": {
+          description: "Artisanal carved pumpkin.",
+          cost: {
+            "Pumpkin": 1,
+            "Candle": 1
+          }
+        },
+        "Moon Dust": {
+          description: "It's like catnip for werewolves.",
+          purchaseText: "This is some really high quality dust! None of that waxing gibbous garbage--it's pure full-moon!",
+          cost: {
+          },
+          max: 5,
+        },
+        //Rites
+        "Rite of Blood": {
+          description: "Magically increases blood harvested.",
+          purchaseText: "We will suck the blood of the world!",
+          ownedText: "Completed",
+          cost: {
+            thralls: 10,
+            blood: 2500
+          }
+        },
+        "Rite of Majesty": {
+          description: "Magically increases your fame's influence.",
+          purchaseText: "Our pumpkins seem to have a much better conversion rate!",
+          ownedText: "Completed",
+          cost: {
+            thralls: 10,
+            fame: 25
+          }
+        },
+        "Rite of The Hallow": {
+          description: "The Danse Macabre. Rule All Hallow's Eve.",
+          puchaseText: "You win!",
+          ownedText: "Completed",
+          cost: {
+            thralls: 666,
+            fame: 750,
+            blood: 225000,
+            "Ancient Relic": 1
+          }
+        },
+        //Scries
+        "Haunted Burg": {
+          description: "The local neighborhood.",
+          purchaseText: "Off she goes! Megan will have a great time in the burg.",
+          ownedText: "Assigned",
+          max: 1,
+          cost: {
+            thralls: 1,
+            blood: 1000
+          }
+        },
+        "Ancient Boneyard": {
+          description: "Where the dead go to rest.",
+          purchaseText: "He's so excited! James loves skeletons!",
+          ownedText: "Assigned",
+          max: 1,
+          cost: {
+            thralls: 1,
+            blood: 2500,
+            "Skeleton Key": 1
+          }
+        },
+        "Darkwood Forest": {
+          description: "It's dark. It's wood. It's a forest.",
+          purchaseText: "Oh my! Jimmy Jimmy James!",
+          ownedText: "Assigned",
+          max: 1,
+          cost: {
+            thralls: 1,
+            blood: 5000,
+            "Moon Dust": 5
           }
         }
       };
@@ -124,6 +231,66 @@ class Reg
 
   public static function item(itemName:String):Dynamic {
     return Reflect.getProperty(items, itemName);
+  }
+
+  //Available locations
+  public static var locations(get, set):Dynamic;
+
+  static function get_locations():Dynamic {
+    if(instance._locations == null) {
+      instance._locations = {
+        "Lair": {
+          state: LairState,
+          longName: "Lair"
+        },
+        "Door": {
+          state: DrinkState,
+          longName: "Front Door"
+        },
+        "Shoppe": {
+          state: ShopState,
+          longName: "Vampyre Shoppe"
+        },
+        "Basement": {
+          state: BasementState,
+          longName: "Basement"
+        },
+        "Cauldron": {
+          state: CauldronState,
+          longName: "Witch Queen's Cauldron"
+        },
+        "Space": {
+          state: SpaceState,
+          longName: "The Moon"
+        },
+        "Boneyard": {
+          state: BoneyardState,
+          longName: "Ancient Boneyard"
+        },
+        "Forest": {
+          state: ForestState,
+          longName: "Darkwood Forest"
+        },
+        "Burg": {
+          state: BurgState,
+          longName: "Haunted Burg"
+        },
+        "Scrying Pool": {
+          state: ScryState,
+          longName: "Scrying Pool"
+        },
+      };
+    }
+    return instance._locations;
+  }
+
+  static function set_locations(value:Dynamic):Dynamic {
+    instance._locations = value;
+    return instance._locations;
+  }
+
+  public static function location(locationName:String):Dynamic {
+    return Reflect.getProperty(locations, locationName);
   }
 
   public function new() {

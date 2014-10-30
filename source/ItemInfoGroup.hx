@@ -15,13 +15,16 @@ class ItemInfoGroup extends InfoGroup
   
   var nameText:FlxText;
   var descriptionText:FlxText;
-  var costText:FlxText;
+  var costTexts:Array<FlxText> = [];
+  var ownedText:FlxText;
+  var costLength:Int;
 
   public function new(ItemName:String) {
-    super(400,300);
+    item = Reg.item(ItemName);
+    costLength = Reflect.fields(item.cost).length;
+    super(400,250 + 60 * costLength);
 
     itemName = ItemName;
-    item = Reg.item(ItemName);
 
     //FlxTween.tween(infoBox.offset, { y: 10 }, 1, { type: FlxTween.PINGPONG, ease: FlxEase.sineInOut });
     //exists = false;
@@ -38,12 +41,17 @@ class ItemInfoGroup extends InfoGroup
     descriptionText.text = item.description;
     add(descriptionText);
 
-    costText = new FlxText(0,0,400,100);
-    costText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 54, 0xfff08382, "left");
-    for(key in Reflect.fields(item.cost)) {
-      costText.text += key + ": " + Reflect.getProperty(item.cost, key) + "\n";
-    };
-    add(costText);
+    for (i in 0...costLength) {
+      var costText:FlxText;
+      costText = new FlxText(0,0,400,100);
+      costText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 54, 0xfff08382, "left");
+      costTexts.push(costText);
+      add(costText);
+    }
+
+    ownedText = new FlxText(0,0,400,100);
+    ownedText.setFormat("assets/fonts/AmaticSC-Regular.ttf", 54, 0xffbf69e7, "left");
+    add(ownedText);
   }
 
   public override function update():Void {
@@ -59,8 +67,31 @@ class ItemInfoGroup extends InfoGroup
     descriptionText.y = infoBox.y + 75;
     descriptionText.alpha = infoBox.alpha;
 
-    costText.x = infoBox.x + 22;
-    costText.y = infoBox.y + 150;
-    costText.alpha = infoBox.alpha;
+    var i:Int = 0;
+    for (text in costTexts) {
+      var price:Float = Reflect.getProperty(item.cost,Reflect.fields(item.cost)[i]);
+      var held:Float = Math.floor(Reg.itemHeld(Reflect.fields(item.cost)[i]));
+      text.x = infoBox.x + 22;
+      text.y = infoBox.y + 160 + 60 * i;
+      text.alpha = infoBox.alpha;
+      text.text = Reflect.fields(item.cost)[i] + ": " + price;
+
+      text.text += " (" + held + ")";
+      if(price > held) {
+        text.color = 0xfff08382;
+      } else {
+        text.color = 0xffe1d0ec;
+      }
+      i++;
+    }
+
+    ownedText.x = infoBox.x + 22;
+    ownedText.y = infoBox.y + 160 + 60 * costLength;
+    ownedText.alpha = infoBox.alpha;
+
+    ownedText.text = (item.ownedText ? item.ownedText : "Owned") + ":" + Reg.itemHeld(itemName);
+    if (!Math.isNaN(item.max)) {
+      ownedText.text += "/" + item.max;
+    }
   }
 }
