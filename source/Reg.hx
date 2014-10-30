@@ -237,32 +237,45 @@ class Reg
     if(instance._locations == null) {
       instance._locations = {
         "Lair": {
-          state: LairState
+          state: LairState,
+          longName: "Lair"
         },
         "Door": {
-          state: DrinkState
+          state: DrinkState,
+          longName: "Front Door"
         },
         "Shoppe": {
-          state: ShopState
+          state: ShopState,
+          longName: "Vampyre Shoppe"
         },
         "Basement": {
-          state: BasementState
+          state: BasementState,
+          longName: "Basement"
         },
         "Cauldron": {
-          state: CauldronState
+          state: CauldronState,
+          longName: "Witch Queen's Cauldron"
         },
         "Space": {
-          state: SpaceState
+          state: SpaceState,
+          longName: "The Moon"
         },
         "Boneyard": {
-          state: BoneyardState
+          state: BoneyardState,
+          longName: "Ancient Boneyard"
         },
         "Forest": {
-          state: ForestState
+          state: ForestState,
+          longName: "Darkwood Forest"
         },
         "Burg": {
-          state: BurgState
-        }
+          state: BurgState,
+          longName: "Haunted Burg"
+        },
+        "Scrying Pool": {
+          state: ScryState,
+          longName: "Scrying Pool"
+        },
       };
     }
     return instance._locations;
