@@ -16,7 +16,9 @@ class GenericShopState extends FlxState
 
   var maxText:String = "You can't hold any more of that.";
   var affordText:String = "You can't afford that.";
-  var purchaseText = "A fine choice.";
+  var purchaseText:String = "A fine choice.";
+  var flavorText:String = "Welcome to my shop!";
+  var title:String = "A shop.";
 
   var width = 610;
   var height = 80;
@@ -30,7 +32,7 @@ class GenericShopState extends FlxState
     add(new BackgroundGroup());
 
     dialog = new DialogGroup();
-    dialog.text = "";
+    dialog.text = flavorText;
     add(dialog);
     
     var i:Int = 0;
@@ -69,7 +71,7 @@ class GenericShopState extends FlxState
       add(button.infoGroup);
     }
     
-    add(new NavGroup("Scrying Pool"));
+    add(new NavGroup(title));
   }
 
   private function purchaseCallback(itemName:String):Void {
