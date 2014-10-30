@@ -12,7 +12,7 @@ class GenericShopState extends FlxState
   var infoGroup:ItemInfoGroup;
   var dialog:DialogGroup;
   var availableItems:Array<String> = ["Candle", "Pumpkin", "Beguiler"];
-  var colums:Float = 1;
+  var columns:Float = 1;
 
   var maxText:String = "You can't hold any more of that.";
   var affordText:String = "You can't afford that.";
@@ -34,11 +34,13 @@ class GenericShopState extends FlxState
     dialog = new DialogGroup();
     dialog.text = flavorText;
     add(dialog);
+
+    width = (610 - ((columns - 1) * 10))/columns;
     
     var i:Int = 0;
     for (itemName in availableItems) {
       var shopButton:GradientButton;
-      shopButton = new GradientButton(170, 115 + i * (height + 10), width, height, itemName, new ItemInfoGroup(itemName));
+      shopButton = new GradientButton(170 + (i%columns * (width + 10)), 115 + Math.floor(i/columns) * (height + 10), width, height, itemName, new ItemInfoGroup(itemName));
       shopButton.onUp.callback = function():Void {
         var item:Dynamic = Reg.item(itemName);
         if (!Math.isNaN(item.max) && item.max <= Reg.itemHeld(itemName)) {
@@ -100,8 +102,8 @@ class GenericShopState extends FlxState
       } else {
         if(!button.enabled) button.enable();
       }
-      button.x = 170;
-      button.y = 115 + i * (height + 10);
+      button.x = 170 + (i%columns * (width + 10));
+      button.y = 115 + Math.floor(i/columns) * (height + 10);
       i++;
     }
     super.update();
