@@ -33,4 +33,8 @@ class BasementState extends GenericShopState
     }
     Reg.inventory.fame++;
   }
+
+  override private function buttonTitle(itemName):String {
+    return "Forge Jack-O-Lantern";
+  }
 }
