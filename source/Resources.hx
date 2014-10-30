@@ -13,6 +13,9 @@ class Resources {
     lastTime = Timer.stamp();
     
     if (FlxG.keys.justPressed.Q) Reg.inventory.blood += 1000;
+    if (FlxG.keys.justPressed.W) Reg.inventory.fame += 1000000;
+    if (FlxG.keys.justPressed.W) Reg.inventory.thralls += 1000;
+
     if (FlxG.keys.justPressed.SPACE) Transition.to(new SpaceState());
   }
 

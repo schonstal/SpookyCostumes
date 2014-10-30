@@ -6,7 +6,7 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 
-class LairState extends FlxState
+class ForestState extends FlxState
 {
   var titleText:FlxText;
 
@@ -58,7 +58,7 @@ class LairState extends FlxState
       add(cauldronButton);
     }
 
-    add(new NavGroup("Lair"));
+    add(new NavGroup("Darkwood Forest"));
 
     FlxG.camera.antialiasing = true;
   }

@@ -80,7 +80,10 @@ class ScryState extends FlxState
       var item:Dynamic = Reg.item(itemName);
       var canAfford:Bool = true;
       for (cost in Reflect.fields(item.cost)) {
-        if(Reflect.getProperty(item.cost, cost) > Reg.itemHeld(item)) canAfford = false;
+        var price:Float = Reflect.getProperty(item.cost, cost);
+        if (Reg.itemHeld(cost) < price) {
+          canAfford = false;
+        }
       }
 
       if (!Math.isNaN(item.max) && item.max <= Reg.itemHeld(itemName) || !canAfford) {

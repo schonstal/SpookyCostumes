@@ -147,11 +147,11 @@ class Reg
           }
         },
         "Moon Dust": {
-          description: "Highly valued by werewolves.",
+          description: "It's like catnip for werewolves.",
           purchaseText: "This is some really high quality dust! None of that waxing gibbous garbage--it's pure full-moon!",
           cost: {
           },
-          max: 1,
+          max: 5,
         },
         //Rites
         "Rite of Blood": {
@@ -178,15 +178,15 @@ class Reg
           ownedText: "Completed",
           cost: {
             thralls: 666,
-            fame: 7500,
-            blood: 2000000,
+            fame: 750,
+            blood: 225000,
             "Ancient Relic": 1
           }
         },
         //Scries
         "Haunted Burg": {
           description: "The local neighborhood.",
-          purchaseText: "Stephanie will have a great time in the burg.",
+          purchaseText: "Off she goes! Megan will have a great time in the burg.",
           ownedText: "Assigned",
           max: 1,
           cost: {
@@ -207,13 +207,13 @@ class Reg
         },
         "Darkwood Forest": {
           description: "It's dark. It's wood. It's a forest.",
-          purchaseText: "He's so excited! James loves skeletons!",
+          purchaseText: "Oh my! Jimmy Jimmy James!",
           ownedText: "Assigned",
           max: 1,
           cost: {
             thralls: 1,
             blood: 5000,
-            "Moon Dust": 1
+            "Moon Dust": 5
           }
         }
       };
@@ -253,6 +253,15 @@ class Reg
         },
         "Space": {
           state: SpaceState
+        },
+        "Boneyard": {
+          state: BoneyardState
+        },
+        "Forest": {
+          state: ForestState
+        },
+        "Burg": {
+          state: BurgState
         }
       };
     }
