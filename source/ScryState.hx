@@ -15,9 +15,6 @@ class ScryState extends GenericShopState
     affordText = "You don't have quite what it takes to go there yet.";
     maxText = "You've already assigned a thrall to this location.";
 
-    if (!Reg.unlocks.basement) availableItems.push("Basement Key");
-    if (!Reg.unlocks.cauldron) availableItems.push("Cauldron");
-
     title = "Scrying Pool";
 
     super.create();

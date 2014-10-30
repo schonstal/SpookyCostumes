@@ -16,6 +16,8 @@ class Reg
 
   static var instance(get, set):Reg;
 
+  public static var newLocation:String = "";
+
   static function get_instance():Reg {
     if (_instance == null) {
       _instance = new Reg();
@@ -91,6 +93,7 @@ class Reg
   public static function unlockLocation(location:String):Void {
     if (Reg.unlocks.locations.indexOf(location) < 0) {
       Reg.unlocks.locations.push(location);
+      newLocation = location;
     }
   }
 

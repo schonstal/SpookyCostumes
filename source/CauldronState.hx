@@ -17,7 +17,8 @@ class CauldronState extends GenericShopState
     affordText = "You don't have the components needed to perform this ritual.";
     maxText = "You can't perform this ritual right now.";
 
+    title = "Witch Queen's Cauldron";
+
     super.create();
-    add(new NavGroup("Witch Queen's Cauldron"));
   }
 }

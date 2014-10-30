@@ -114,6 +114,21 @@ class NavGroup extends FlxSpriteGroup
         }
       }
     }
+
+    addLocation();
+  }
+
+  private function addLocation():Void {
+    if (Reg.newLocation == "") return;
+
+    var locationButton:FlxText;
+    locationButton = new FlxText(-100, 60 * (locationButtons.length + 1), 150, Reg.newLocation);
+    locationButton.setFormat("assets/fonts/AmaticSC-Bold.ttf", 42, 0xff9f79b7, "left");
+    locationButton.alpha = 0;
+    add(locationButton);
+    locationButtons.push(locationButton);
+
+    Reg.newLocation = "";
   }
 
   public function enable():Void {
