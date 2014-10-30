@@ -35,7 +35,7 @@ class GenericShopState extends FlxState
     dialog.text = flavorText;
     add(dialog);
 
-    width = (610 - ((columns - 1) * 10))/columns;
+    width = Std.int((610 - ((columns - 1) * 10))/columns);
     
     var i:Int = 0;
     for (itemName in availableItems) {
