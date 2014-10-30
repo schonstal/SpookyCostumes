@@ -6,15 +6,17 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 
-class BurgState extends GenericShopState
+class SpookyState extends GenericShopState
 {
   override public function create():Void {
-    availableItems = ["Candle Box", "Pumpkin Box", "Candle Crate", "Pumpkin Crate", "Bone Shard", "Bone Dagger"];
-    flavorText = "We're all out of Moon Dust! If you need it, you'll have to get it from Space yourself; you just need to use the Key.";
+    availableItems = ["Candle Box", "Pumpkin Box", "Bone Shard", "Bone Hammer", "Harvester"];
+    flavorText = "It's a Halloween sale! What'll ya have?";
     affordText = "You don't have enough blood to buy that.";
     maxText = "Sorry, I'm sold out.";
 
-    title = "The Haunted Burg";
+    if (!Reg.unlocks.library) availableItems.push("Library Card");
+
+    title = "Spooky Shoppe";
 
     columns = 2;
 

@@ -20,6 +20,10 @@ class GenericShopState extends FlxState
   var flavorText:String = "Welcome to my shop!";
   var title:String = "A shop.";
 
+  var showHovers:Bool = true;
+
+  var sprite = "shopkeeper1.png";
+
   var width = 610;
   var height = 80;
 
@@ -30,6 +34,10 @@ class GenericShopState extends FlxState
     Transition.finish();
 
     add(new BackgroundGroup());
+
+    var characterSprite:FlxSprite = new FlxSprite(900, 59);
+    characterSprite.loadGraphic("assets/images/characters/" + sprite);
+    add(characterSprite);
 
     dialog = new DialogGroup();
     dialog.text = flavorText;
@@ -61,7 +69,6 @@ class GenericShopState extends FlxState
           Reg.addItem(cost, -price);
         }
         dialog.text = item.purchaseText == null ? purchaseText : item.purchaseText;
-        Reg.addItem(itemName);
         purchaseCallback(itemName);
       }
       add(shopButton);
@@ -71,14 +78,17 @@ class GenericShopState extends FlxState
 
     FlxG.camera.antialiasing = true;
 
-    for (buttonObject in buttons) {
-      add(buttonObject.button.infoGroup);
+    if (showHovers) {
+      for (buttonObject in buttons) {
+        add(buttonObject.button.infoGroup);
+      }
     }
     
     add(new NavGroup(title));
   }
 
   private function purchaseCallback(itemName:String):Void {
+    Reg.addItem(itemName);
     return;
   }
 
