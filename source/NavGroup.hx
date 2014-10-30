@@ -107,7 +107,7 @@ class NavGroup extends FlxSpriteGroup
           locationButton.color = 0xffe9a56d; 
           if (FlxG.mouse.justPressed) {
             transitioning = true;
-            Transition.to(Type.createInstance(Reg.location(locationButton.text).state, []));
+            Transition.to(Type.createInstance(Reg.location(locationButton.text.split(" ")[0]).state, []));
           }
         } else {
           locationButton.color = 0xff9f79b7;
@@ -116,10 +116,16 @@ class NavGroup extends FlxSpriteGroup
     }
 
     addLocation();
+
+    locationButtons[0].text = "Door (" + (Math.floor(Reg.inventory.kids) < 999999 ? ""+Math.floor(Reg.inventory.kids) : "...") + ")";
   }
 
   private function addLocation():Void {
     if (Reg.newLocation == "") return;
+    if (Reg.newLocation == locationButtons[locationButtons.length-1].text) {
+      Reg.newLocation = "";
+      return;
+    }
 
     var locationButton:FlxText;
     locationButton = new FlxText(-100, 60 * (locationButtons.length + 1), 150, Reg.newLocation);

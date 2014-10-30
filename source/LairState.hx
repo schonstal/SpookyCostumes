@@ -12,7 +12,7 @@ class LairState extends LocationState
     title = "Lair";
     locations = ["Door", "Shoppe"];
     if (Reg.unlocks.basement) locations.push("Basement");
-    if (Reg.unlocks.scrying) locations.push("Scrying Pool");
+    if (Reg.unlocks.scrying) locations.push("Pool");
     if (Reg.unlocks.cauldron) locations.push("Cauldron");
 
     super.create();

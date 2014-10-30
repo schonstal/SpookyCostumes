@@ -73,13 +73,25 @@ class Reg
     Reflect.setProperty(inventory, itemName, quantity);
   }
 
+  public static function reset():Void {
+    instance._save.data.inventory = {
+      blood: 0,
+      kids: 0,
+      thralls: 0,
+      fame: 0
+    };
+    instance._save.data.unlocks = {
+      locations: ["Door", "Lair"]
+    };
+  }
+
   //Unlocks
   public static var unlocks(get, set):Dynamic;
 
   static function get_unlocks():Dynamic {
     if(instance._save.data.unlocks == null) {
       instance._save.data.unlocks = {
-        locations: ["Lair"]
+        locations: ["Door", "Lair"]
       };
     }
     return instance._save.data.unlocks;
@@ -117,6 +129,34 @@ class Reg
             blood: 10
           }
         },
+        "Pumpkin Box": {
+          description: "10 decorative squashes.",
+          purchaseText: "Great for carving!",
+          cost: {
+            blood: 300
+          }
+        },
+        "Candle Box": {
+          description: "10 scented candles.",
+          purchaseText: "Perfectly sized for a pumpkin!",
+          cost: {
+            blood: 100
+          }
+        },
+        "Pumpkin Crate": {
+          description: "100 decorative squashes.",
+          purchaseText: "Great for carving!",
+          cost: {
+            blood: 3000
+          }
+        },
+        "Candle Crate": {
+          description: "100 scented candles.",
+          purchaseText: "Perfectly sized for a pumpkin!",
+          cost: {
+            blood: 1000
+          }
+        },
         "Basement Key": {
           description: "Unlocks the basement.",
           purchaseText: "I wonder what's down there...",
@@ -149,12 +189,80 @@ class Reg
             "Candle": 1
           }
         },
+        "10 Jack-O-Lanterns": {
+          description: "Artisanal carved pumpkin.",
+          cost: {
+            "Pumpkin": 100,
+            "Candle": 100
+          }
+        },
+        "100 Jack-O-Lanterns": {
+          description: "Artisanal carved pumpkin.",
+          cost: {
+            "Pumpkin": 100,
+            "Candle": 100
+          }
+        },
         "Moon Dust": {
           description: "It's like catnip for werewolves.",
           purchaseText: "This is some really high quality dust! None of that waxing gibbous garbage--it's pure full-moon!",
           cost: {
           },
           max: 5,
+        },
+        "Ancient Relic": {
+          description: "The fabled artifact",
+          purchaseText: "We gotta take this to the cauldron right now!",
+          cost: {
+          },
+          max: 1,
+        },
+        "Skeleton Key": {
+          description: "Get into locked doors.",
+          purchaseText: "This key will get you into the graveyard.",
+          max: 1,
+          cost: {
+            "Bone Shard": 10
+          }
+        },
+        "Bone Shard": {
+          description: "A small piece of bone.",
+          purchaseText: "I don't really know what you'd want this for, but they seem to be popular these days!",
+          cost: {
+            blood: 100
+          }
+        },
+        "Bone Hammer": {
+          description: "Needed to forge bone.",
+          purchaseText: "There's a bonesmith down the road; he knows how to use this.",
+          max: 1,
+          cost: {
+            blood: 1000
+          }
+        },
+        "Harvester": {
+          description: "Automatically collect blood from a distance.",
+          purchaseText: "I've always wanted one of these!",
+          max: 1,
+          cost: {
+            blood: 8000
+          }
+        },
+        "Bone Dagger": {
+          description: "Carves pumpkins much faster.",
+          purchaseText: "Take this to the carver straight away!",
+          max: 1,
+          cost: {
+            blood: 1500
+          }
+        },
+        "Candleabra": {
+          description: "An ornate candle holder.",
+          purchaseText: "Wow, this is beautiful!",
+          cost: {
+            "Candle": 10,
+            "Bone Shard": 3
+          }
         },
         //Rites
         "Rite of Blood": {
@@ -172,24 +280,25 @@ class Reg
           ownedText: "Completed",
           cost: {
             thralls: 10,
-            fame: 25
+            fame: 10,
+            blood: 2000
           }
         },
         "Rite of The Hallow": {
           description: "The Danse Macabre. Rule All Hallow's Eve.",
-          puchaseText: "You win!",
+          puchaseText: "...",
           ownedText: "Completed",
           cost: {
-            thralls: 666,
-            fame: 750,
-            blood: 225000,
+            thralls: 25,
+            fame: 666,
+            blood: 100000,
             "Ancient Relic": 1
           }
         },
         //Scries
         "Haunted Burg": {
           description: "The local neighborhood.",
-          purchaseText: "Off she goes! Megan will have a great time in the burg.",
+          purchaseText: "My oh my! Megan's the lucky winner! She's gonna have a great time in the burg!",
           ownedText: "Assigned",
           max: 1,
           cost: {
@@ -199,7 +308,7 @@ class Reg
         },
         "Ancient Boneyard": {
           description: "Where the dead go to rest.",
-          purchaseText: "He's so excited! James loves skeletons!",
+          purchaseText: "This is gonna be good. I can feel it. We'll send Brandon.",
           ownedText: "Assigned",
           max: 1,
           cost: {
@@ -210,7 +319,7 @@ class Reg
         },
         "Darkwood Forest": {
           description: "It's dark. It's wood. It's a forest.",
-          purchaseText: "Oh my! Jimmy Jimmy James!",
+          purchaseText: "Oh my! Jimmy Jimmy James! It's James's turn to go out to the forest!",
           ownedText: "Assigned",
           max: 1,
           cost: {
@@ -268,17 +377,29 @@ class Reg
           longName: "Ancient Boneyard"
         },
         "Forest": {
-          state: ForestState,
+          state: CircleState,
           longName: "Darkwood Forest"
         },
         "Burg": {
           state: BurgState,
           longName: "Haunted Burg"
         },
-        "Scrying Pool": {
+        "Pool": {
           state: ScryState,
           longName: "Scrying Pool"
         },
+        "Spooky": {
+          state: SpookyState,
+          longName: "Spooky Shoppe"
+        },
+        "Circle": {
+          state: CircleState,
+          longName: "Magic Circle"
+        },
+        "Harvester": {
+          state: HarvestState,
+          longName: "Harvester"
+        }
       };
     }
     return instance._locations;

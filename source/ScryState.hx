@@ -17,10 +17,12 @@ class ScryState extends GenericShopState
 
     title = "Scrying Pool";
 
+    Reg.unlockLocation("Pool");
     super.create();
   }
 
   override private function purchaseCallback(itemName:String):Void {
+    Reg.addItem(itemName);
     Reg.unlockLocation(itemName.split(" ")[1]);
   }
 }
